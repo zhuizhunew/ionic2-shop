@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Home</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <h2 (click)="goLogin()" class="title">Welcome to Ionic!</h2>
+  <p color="twitter" text-uppercase>
+    This starter project comes with simple tabs-based layout for apps
+    that are going to primarily use a Tabbed UI.
+  </p>
+  <p>
+    Take a look at the <code text-uppercase>src/pages/</code> directory to add or change tabs,
+    update any existing page or create new pages.
+  </p>
+  <div hideWhen="android">
+    I am hidden on Android!
+  </div>
+  <ion-item-sliding>
+    <ion-item>
+      Item 1
+    </ion-item>
+    <!--<ion-item-options side="right" (ionSwipe)="saveItem(item)">-->
+      <!--<button ion-button expandable (click)="saveItem(item)">-->
+        <!--<ion-icon name="star"></ion-icon>-->
+      <!--</button>-->
+    <!--</ion-item-options>-->
+  </ion-item-sliding>
+  <!--<ion-list>-->
+    <!--<ion-item-sliding #item>-->
+      <!--<ion-item>-->
+        <!--Item-->
+      <!--</ion-item>-->
+      <!--<ion-item-options side="left">-->
+        <!--<button ion-button (click)="favorite(item)">Favorite</button>-->
+        <!--<button ion-button color="danger" (click)="share(item)">Share</button>-->
+      <!--</ion-item-options>-->
+
+      <!--<ion-item-options side="right">-->
+        <!--<button ion-button (click)="unread(item)">Unread</button>-->
+      <!--</ion-item-options>-->
+    <!--</ion-item-sliding>-->
+  <!--</ion-list>-->
+</ion-content>

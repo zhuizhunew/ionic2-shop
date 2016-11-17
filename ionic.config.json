@@ -1,0 +1,11 @@
+{
+  "name": "Ionic",
+  "app_id": "",
+  "v2": true,
+  "typescript": true,
+  "proxies": [
+    {
+      "path": "/food/",
+      "proxyUrl": "http://192.168.102.28:8000"
+    }]
+}

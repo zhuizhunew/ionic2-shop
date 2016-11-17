@@ -1,0 +1,14 @@
+<ion-footer class="about-page-footer shop-cart-footer">
+  <div>
+    <button class="item" (click)="show()" [disabled]="shopCart.totalAmount == 0" style="text-align: left">
+      <img src="../../assets/icon/ic_shopping_cart_black_24px.svg" alt="" *ngIf="shopCart.totalMoney == 0">
+      <img src="../../assets/icon/ic_shopping_cart_white_24px.svg" alt="" *ngIf="shopCart.totalMoney !== 0">
+      <span *ngIf="shopCart.totalAmount > 0"
+            style="position: absolute;top: 5px;left: 25px;background-color: red;line-height: 15px;font-size: 16px;border-radius: 50%;padding: 2px">{{ shopCart.totalAmount }}</span>
+      <span *ngIf="shopCart.totalAmount == 0">购物车是空的</span>
+      <span *ngIf="shopCart.totalAmount !== 0" style="margin-left: 30px">${{ shopCart.totalMoney }}</span>
+    </button><button [ngClass]="{item2:shopCart.totalMoney==0,item3:shopCart.totalMoney!==0}"
+            [disabled]="shopCart.totalMoney == 0" (click)="getProductList()">去结算
+    </button>
+  </div>
+</ion-footer>

@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      About
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div style="height: 150px;background-color: #0c60ee"></div>
+  <ion-scroll scrollY="true" style="background-color: #eeeeee;width: 90px;display: inline-block"
+              [ngStyle]="{'height.px': heigt}">
+    <div *ngFor="let item of catagory_new">
+      <p [ngClass]="selected_index == item.id?'selected':''" (click)="select_new(item)">{{ item.name }}</p>
+      <p *ngIf="selected_index == item.id && item.children_data.length>0" style="padding-left: 0!important;">
+        <span *ngFor="let sub of item.children_data" (click)="choose(sub)"
+              [ngClass]="sub_selected_index == sub.id?'selected2':''" style="padding-left: 5px">
+          {{ sub.name }}
+      </span>
+      </p>
+    </div>
+  </ion-scroll>
+  <div style="width: 200px;display: inline-block">
+    <p style="background-color: #eeeeee;margin: 0" id="title1" [ngStyle]="{'width.px': width}">{{ catagory_item }}</p>
+    <ion-scroll style="display: inline-block" scrollY="true" id="title"
+                [ngStyle]="{'height.px': heigt,'width.px': width}">
+      <div style="padding: 10px;border-bottom: 1px solid #dddddd;min-height: 100px" *ngFor="let obj of goods" (click)="goDetail(obj)">
+        <img src="{{ obj.img }}" alt="" style="vertical-align: top;float: left;width: 25%;">
+        <p style="border-bottom: none;float: left;position: relative;width: 75%;min-height: 80px">
+          <span style="padding-left: 10px;border-bottom: none">{{obj.name}}</span>
+          <span style="padding-left: 10px;border-bottom: none;display: inline-block" *ngIf="obj.price >0">${{ obj.price }}</span>
+          <span style="position: absolute;right: 0;bottom: 0;border-bottom: none" *ngIf="obj.price >0">
+             <img src="../../assets/icon/ic_remove_black_24px.svg" alt=""
+                  style="border: 1px solid #222;border-radius: 50%;vertical-align: sub;width: 20px;" *ngIf="obj.count>0"
+                  (click)="remove(obj)">
+             <em *ngIf="obj.count>0" style="font-size: 20px;font-style: normal">{{ obj.count }}</em>
+            <img src="../../assets/icon/ic_add_black_24px.svg" alt=""
+                 style="border: 1px solid #222;border-radius: 50%;vertical-align: sub;width: 20px"
+                 (click)="add(obj)">
+          </span>
+        </p>
+      </div>
+    </ion-scroll>
+  </div>
+</ion-content>
+<!--<ion-footer class="about-page-footer">-->
+  <!--<div>-->
+    <!--<button class="item" (click)="showGoods()" [disabled]="shopCart.totalAmount == 0" style="text-align: left">-->
+      <!--<img src="../../assets/icon/ic_shopping_cart_black_24px.svg" alt="" *ngIf="shopCart.totalMoney == 0">-->
+      <!--<img src="../../assets/icon/ic_shopping_cart_white_24px.svg" alt="" *ngIf="shopCart.totalMoney !== 0">-->
+      <!--<span *ngIf="shopCart.totalAmount > 0" style="position: absolute;top: 5px;left: 25px;background-color: red;line-height: 15px;font-size: 16px;border-radius: 50%;padding: 2px">{{ shopCart.totalAmount }}</span>-->
+      <!--<span *ngIf="shopCart.totalAmount == 0">购物车是空的</span>-->
+      <!--<span *ngIf="shopCart.totalAmount !== 0" style="margin-left: 30px">${{ shopCart.totalMoney }}</span>-->
+    <!--</button><button [ngClass]="{item2:shopCart.totalMoney==0,item3:shopCart.totalMoney!==0}"-->
+            <!--[disabled]="shopCart.totalMoney == 0" (click)="getProductList()">去结算-->
+    <!--</button>-->
+  <!--</div>-->
+<!--</ion-footer>-->
+<shopCart [shopCart]="shopCart" [show]="showGoodsCart"></shopCart>

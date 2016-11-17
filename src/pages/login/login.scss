@@ -1,0 +1,56 @@
+ion-scroll {
+  .scroll-content {
+    padding: 0!important;
+    p {
+      margin:0!important;
+      min-height: 30px;
+      line-height: 30px;
+      padding-left: 5px;
+      border-bottom: 1px solid #dddddd;
+      span {
+        display: block;
+        border-bottom: 1px dashed #dddddd;
+      }
+    }
+    .selected {
+      background-color: #ffffff;
+      color: #0c60ee;
+      &:before {
+        content: '';
+        position: absolute;
+        width: 2px;
+        height: 30px;
+        background-color: #0c60ee;
+        left: 0;
+      }
+    }
+    .selected2 {
+      background-color: #ffffff;
+      color: #2ec95c;
+      //&:before {
+      //  content: '';
+      //  position: absolute;
+      //  width: 2px;
+      //  height: 30px;
+      //  background-color: #2ec95c;
+      //  left: 0;
+      //}
+    }
+    .selected4 {
+      background-color: #ffffff;
+      color: #000000;
+    }
+    .selected3 {
+      background-color: #ffffff;
+      color: #4d004d;
+      //&:before {
+      //  content: '';
+      //  position: absolute;
+      //  width: 2px;
+      //  height: 30px;
+      //  background-color: #9eeeb6;
+      //  left: 0;
+      //}
+    }
+  }
+}

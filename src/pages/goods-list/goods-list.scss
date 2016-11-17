@@ -1,0 +1,139 @@
+.goods-info {
+  padding: 0 10px 0 10px;
+  border-top: 1px solid #eeeeee;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.goods-color {
+  border-bottom: 1px solid #eeeeee;
+  p {
+    &:nth-child(1) {
+      margin: 5px;
+    }
+  }
+  .color-button {
+    margin: 0;
+    span {
+      width: 50px;
+      height: 30px;
+      display: inline-block;
+      margin: 0 10px;
+      border: 1px solid #eeeeee;
+    }
+    .selected {
+      border: 2px solid red;
+    }
+  }
+}
+
+.goods-name {
+  border-bottom: 1px solid #eeeeee;
+  p {
+    margin: 5px;
+    &:nth-child(1) {
+      font-size: 20px;
+      color: rgb(51, 51, 51);
+    }
+    &:nth-child(2) {
+      color: red;
+      font-size: 18px;
+    }
+  }
+}
+
+.goods-img {
+  height: 200px;
+  img {
+    height: 200px;
+  }
+}
+
+.goods-size {
+  border-bottom: 1px solid #eeeeee;
+  padding-bottom: 5px;
+  p {
+    &:nth-child(1) {
+      margin: 5px;
+    }
+    &:nth-child(2) {
+      margin: 0;
+      span {
+        width: 50px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        display: inline-block;
+        margin: 0 10px;
+        border: 1px solid #eeeeee;
+      }
+      .selected {
+        border: 2px solid red;
+      }
+    }
+  }
+}
+
+.goods-num {
+  display: flex;
+  justify-content: space-between;
+  height: 30px;
+  line-height: 30px;
+  span {
+    &:nth-child(2) {
+      img {
+        border: 1px solid #222222;
+        border-radius: 50%;
+        width: 20px;
+        vertical-align: middle;
+      }
+      em {
+        font-style: normal;
+      }
+    }
+  }
+}
+
+.goods-info-more {
+  display: flex;
+  justify-content: space-around;
+  height: 30px;
+  line-height: 30px;
+  border-bottom: 1px solid #eeeeee;
+  color: #959595;
+  .selected {
+    color: #222222;
+    border-bottom: 1px solid #222;
+  }
+}
+
+.content-slide {
+  height: auto !important;
+  ion-slide {
+    padding: 10px;
+    p {
+      text-align: left;
+      margin: 5px;
+      font-size: 14px;
+      span {
+        &:nth-child(1) {
+          font-weight: bold;
+        }
+        &:nth-child(2) {
+          margin-left: 20px;
+        }
+      }
+    }
+  }
+  .swiper-slide {
+    display: block !important;
+  }
+}
+
+//////////////////////
+.goods-list-bottom {
+  ion-footer {
+    bottom: 0!important;
+  }
+}
+
+

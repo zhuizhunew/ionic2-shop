@@ -1,0 +1,44 @@
+.about-page-footer {
+  height: 50px;
+  border-top:1px solid #dddddd;
+  .item {
+    display: inline-block;
+    height: 50px;
+    line-height: 50px;
+    width:70%;
+    opacity: 1!important;
+    img {
+      vertical-align: middle;
+    }
+  }
+  .item2 {
+    background-color: #eeeeee;
+    display: inline-block;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    width:30%;
+  }
+  .item3 {
+    background-color: #2ec95c;
+    display: inline-block;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    width:30%;
+  }
+}
+
+.goodsMenu {
+  ion-backdrop {
+    opacity: 0.5!important;
+    height:567px!important;
+  }
+  .popover-content {
+    left:0!important;
+    bottom: 99px !important;
+    top: auto!important;
+    width: 100%;
+    border-radius: 0!important;
+  }
+}

@@ -1,0 +1,33 @@
+<ion-content>
+  <div style="border-bottom: 1px solid #dddddd;padding: 0 10px;display: flex;justify-content: space-between;color: #959595;height: 35px;line-height: 35px">
+    <span (click)="checkAll()">
+    <img [src]="checkImg" alt="" style="vertical-align: middle;border: 1px solid #222;border-radius: 50%">
+    <span>全选(已选{{ totalAmount }}件)</span>
+    </span>
+    <span (click)="clearAllGoods()">
+      <img src="../../assets/icon/ic_delete_black_24px.svg" alt="" style="vertical-align: middle">
+      <span>清空购物车</span>
+    </span>
+  </div>
+  <div style="padding: 5px;border-bottom: 1px solid #eeeeee;min-height: 70px" *ngFor="let obj of goodsData">
+    <img src="{{ obj.checkImg }}" alt=""
+         style="vertical-align: top;float: left;margin: 17px 10px 0 0;border: 1px solid #222;border-radius: 50%"
+         (click)="check(obj)">
+    <img src="{{ obj.img }}" alt="" style="vertical-align: top;float: left;width: 50px;">
+    <div style="border-bottom: none;float: left;position: relative;width: 75%;min-height: 60px">
+      <span style="padding-left: 10px;border-bottom: none">{{obj.name}}</span>
+      <p style="margin: 0;position: absolute;bottom: 0;width: 100%">
+        <span style="padding-left: 10px;border-bottom: none">${{ obj.price * obj.count }}</span>
+        <span style="border-bottom: none;float: right;">
+             <img src="../../assets/icon/ic_remove_black_24px.svg" alt=""
+                  style="border: 1px solid #222;border-radius: 50%;vertical-align: sub;width: 20px" *ngIf="obj.count>0"
+                  (click)="reduce(obj)">
+             <em *ngIf="obj.count>0" style="font-size: 20px;font-style: normal">{{ obj.count }}</em>
+            <img src="../../assets/icon/ic_add_black_24px.svg" alt=""
+                 style="border: 1px solid #222;border-radius: 50%;vertical-align: sub;width: 20px"
+                 (click)="plus(obj)">
+          </span>
+      </p>
+    </div>
+  </div>
+</ion-content>
