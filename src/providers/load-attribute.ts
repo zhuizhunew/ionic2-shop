@@ -100,16 +100,19 @@ export class LoadAttribute {
     this.dataPool.load(config5);
     this.dataPool.load(config6);
     this.dataPool.load(config7);
-    this.dataPool.request('size').write('abc0', {});
-    this.dataPool.request('color').write('abc0', {});
-    this.dataPool.request('pattern').write('abc0', {});
-    this.dataPool.request('climate').write('abc0', {});
-    this.dataPool.request('material').write('abc0', {});
-    this.dataPool.request('style_general').write('abc0', {});
-    this.dataPool.request('style_bottom').write('abc0', {});
-    this.dataPool.request('goods_cart').write('abc', {});
+    this.dataPool.request('size').write('size', {});
+    this.dataPool.request('color').write('color', {});
+    this.dataPool.request('pattern').write('pattern', {});
+    this.dataPool.request('climate').write('climate', {});
+    this.dataPool.request('material').write('material', {});
+    this.dataPool.request('style_general').write('style_general', {});
+    this.dataPool.request('style_bottom').write('style_bottom', {});
+    this.dataPool.request('goods_cart').write('goodsCart', {goods:{goodsMenu: [], totalMoney: 0, totalAmount: 0}});
     // this.dataPool.request('size').read('0').then(data => {
     //   console.log('datapool', data);
     // });
   }
 }
+
+
+

@@ -3,7 +3,7 @@ import {NavController, NavParams, Slides} from 'ionic-angular';
 import {Fetch} from 'emiya-angular2-fetch';
 import {searchProductsBySkus} from '../../tools/magento-search';
 import {DataPool} from 'emiya-angular2-datapool';
-import {ShopCartPage} from '../../directives/shopcart-footer';
+import {ShopCartPage} from '../../directives/shopcart/shopcart-footer';
 
 @Component({
   selector: 'page-goods-list',
@@ -70,7 +70,7 @@ export class GoodsListPage {
     });
     this.dataPool.request('goods_cart').read().then(data => {
       console.log('222222', data)
-      this.shopCart = data['abc']['goods'];
+      // this.shopCart = data['abc']['goods'];
     }).catch(err => {
       alert(err);
     });

@@ -2,14 +2,14 @@
   <div style="border-bottom: 1px solid #dddddd;padding: 0 10px;display: flex;justify-content: space-between;color: #959595;height: 35px;line-height: 35px">
     <span (click)="checkAll()">
     <img [src]="checkImg" alt="" style="vertical-align: middle;border: 1px solid #222;border-radius: 50%">
-    <span>全选(已选{{ totalAmount }}件)</span>
+    <span>全选(已选{{ shopCart.totalAmount }}件)</span>
     </span>
     <span (click)="clearAllGoods()">
       <img src="../../assets/icon/ic_delete_black_24px.svg" alt="" style="vertical-align: middle">
       <span>清空购物车</span>
     </span>
   </div>
-  <div style="padding: 5px;border-bottom: 1px solid #eeeeee;min-height: 70px" *ngFor="let obj of goodsData">
+  <div style="padding: 5px;border-bottom: 1px solid #eeeeee;min-height: 70px" *ngFor="let obj of shopCart.goodsMenu">
     <img src="{{ obj.checkImg }}" alt=""
          style="vertical-align: top;float: left;margin: 17px 10px 0 0;border: 1px solid #222;border-radius: 50%"
          (click)="check(obj)">

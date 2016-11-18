@@ -1,5 +1,7 @@
 import {Component} from '@angular/core';
 import {NavController, ViewController, NavParams, AlertController} from 'ionic-angular';
+import {DataPool} from 'emiya-angular2-datapool';
+import {Event} from 'emiya-angular2-event';
 
 @Component({
   templateUrl: 'goods-menu.html',
@@ -10,15 +12,40 @@ export class PopoverPage {
   public totalMoney: any;
   public totalAmount: any;
   public checkImg = '../../assets/icon/ic_check_black_24px.svg';
+  public shopCart = {goodsMenu: [], totalMoney: 0, totalAmount: 0};
 
-  constructor(public viewCtrl: ViewController, private params: NavParams, private alertCtrl: AlertController) {
-    this.goodsData = this.params.data.data.goodsMenu;
-    this.goodsData.map(item => {
-      return item.checkImg = '../../assets/icon/ic_check_black_24px.svg';
+  constructor(public viewCtrl: ViewController, private params: NavParams, private alertCtrl: AlertController, private dataPool: DataPool) {
+    dataPool.request('goods_cart').onChange(() => {
+      console.log('dataPool onchange');
+      dataPool.request('goods_cart').read('goodsCart').then(data => {
+        console.log('data pool change',data['goods']);
+        this.shopCart = data['goods'];
+        // this.goodsData = this.shopCart.goodsMenu;
+        this.shopCart.goodsMenu.map(item => {
+          return item.checkImg = '../../assets/icon/ic_check_black_24px.svg';
+        })
+        // this.totalMoney = this.shopCart.totalMoney;
+        // this.totalAmount = this.shopCart.totalAmount;
+      })
     })
-    this.totalMoney = this.params.data.data.goodsMenu.count * this.params.data.data.goodsMenu.price;
-    this.totalAmount = this.params.data.data.totalAmount;
+
+    // this.shopCart.goodsMenu.map(item => {
+    //   return item.checkImg = '../../assets/icon/ic_check_black_24px.svg';
+    // })
+    // this.goodsData = this.shopCart.goodsMenu;
+    // this.goodsData.map(item => {
+    //   return item.checkImg = '../../assets/icon/ic_check_black_24px.svg';
+    // })
+    // this.totalMoney = this.shopCart.totalMoney;
+    // this.totalAmount = this.shopCart.totalAmount;
+    // this.dataPoolChange();
   }
+
+  // dataPoolChange() {
+  //   this.dataPool.request('goods_cart').onChange(() => {
+  //     console.log('dataPool onchange');
+  //   })
+  // }
 
   close() {
     this.viewCtrl.dismiss(undefined, undefined, {duration: 1000, animate: false});
@@ -28,59 +55,67 @@ export class PopoverPage {
     if (obj.checkImg == '../../assets/icon/ic_check_white_24px.svg') {
       this.check(obj);
     }
-    let i = this.goodsData.indexOf(obj);
-    this.goodsData[i].count += 1;
-    this.totalMoney += obj.price;
-    this.params.data.data.totalMoney += obj.price;
-    this.params.data.data.totalAmount ++;
+    let i = this.shopCart.goodsMenu.indexOf(obj);
+    this.shopCart.goodsMenu[i].count += 1;
+    // this.totalMoney += obj.price;
+    this.shopCart.totalMoney += obj.price;
+    this.shopCart.totalAmount ++;
+    this.dataPool.request('goods_cart').write('goodsCart', {goods: this.shopCart});
+    Event.emit('refreshCount',{});
   }
 
   reduce(obj) {
     if (obj.checkImg == '../../assets/icon/ic_check_white_24px.svg') {
       this.check(obj);
     }
-    this.totalMoney -= obj.price;
-    let i = this.goodsData.indexOf(obj);
+    // this.totalMoney -= obj.price;
+    let i = this.shopCart.goodsMenu.indexOf(obj);
     if (obj.count > 1) {
-      this.goodsData[i].count--;
+      this.shopCart.goodsMenu[i].count--;
     } else {
       obj.count--;
-      this.goodsData.splice(i, 1);
+      this.shopCart.goodsMenu.splice(i, 1);
     }
-    this.params.data.data.totalMoney -= obj.price;
-    this.params.data.data.totalAmount --;
-    if (this.params.data.data.totalMoney == 0) {
+    this.shopCart.totalMoney -= obj.price;
+    this.shopCart.totalAmount --;
+    if (this.shopCart.totalMoney == 0) {
       this.close();
     }
+    this.dataPool.request('goods_cart').write('goodsCart', {goods: this.shopCart});
+    Event.emit('refreshCount',{});
   }
 
   check(obj) {
     if (obj.checkImg == '../../assets/icon/ic_check_black_24px.svg') {
       obj.checkImg = '../../assets/icon/ic_check_white_24px.svg';
-      this.params.data.data.totalMoney -= obj.price * obj.count;
-      this.totalAmount -= obj.count;
+      this.shopCart.totalMoney -= obj.price * obj.count;
+      this.shopCart.totalAmount -= obj.count;
     } else if (obj.checkImg == '../../assets/icon/ic_check_white_24px.svg') {
       obj.checkImg = '../../assets/icon/ic_check_black_24px.svg';
-      this.params.data.data.totalMoney += obj.price * obj.count;
-      this.totalAmount += obj.count;
+      this.shopCart.totalMoney += obj.price * obj.count;
+      this.shopCart.totalAmount += obj.count;
     }
+    // this.dataPool.request('goods_cart').write('goodsCart', {goods: this.shopCart});
   }
 
   checkAll() {
     if (this.checkImg == '../../assets/icon/ic_check_black_24px.svg') {
       this.checkImg = '../../assets/icon/ic_check_white_24px.svg';
-      this.goodsData.map(item => {
+      this.shopCart.goodsMenu.map(item => {
         return item.checkImg = '../../assets/icon/ic_check_white_24px.svg';
       })
-      this.params.data.data.totalMoney = 0.00;
-      this.totalAmount = 0;
+      this.shopCart.totalMoney = 0.00;
+      this.shopCart.totalAmount = 0;
     } else {
       this.checkImg = '../../assets/icon/ic_check_black_24px.svg';
-      this.goodsData.map(item => {
-        this.params.data.data.totalMoney += (item.count * item.price);
+      this.shopCart.goodsMenu.map(item => {
+        this.shopCart.totalMoney += (item.count * item.price);
         return item.checkImg = '../../assets/icon/ic_check_black_24px.svg';
       })
-      this.totalAmount = this.params.data.data.totalAmount;
+      this.shopCart.goodsMenu.map(item => {
+        this.shopCart.totalAmount += item.count;
+      })
+      // this.shopCart.totalAmount = this.shopCart.totalAmount;
     }
   }
 
@@ -104,12 +139,13 @@ export class PopoverPage {
   }
 
   clearShopCart() {
-    this.params.data.data.goodsMenu.map(item => {
-      item.count = 0;
-    })
-    this.params.data.data.goodsMenu = [];
-    this.params.data.data.totalMoney = 0.00;
-    this.params.data.data.totalAmount = 0;
+    // this.shopCart.goodsMenu.map(item => {
+    //   item.count = 0;
+    // })
+    this.shopCart.goodsMenu = [];
+    this.shopCart.totalMoney = 0.00;
+    this.shopCart.totalAmount = 0;
+    this.dataPool.request('goods_cart').write('goodsCart', {goods: this.shopCart});
     this.close();
   }
 }

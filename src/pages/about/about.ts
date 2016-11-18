@@ -7,12 +7,16 @@ import {searchProductsBySkus} from '../../tools/magento-search';
 import {PopoverPage} from '../goods-menu/goods-menu';
 import {GoodsInfoPage} from '../goods-info/goods-info';
 import {GoodsListPage} from '../goods-list/goods-list';
-import {ShopCartPage} from '../../directives/shopcart-footer';
+import {ShopCartPage} from '../../directives/shopcart/shopcart-footer';
 import {DataPool} from 'emiya-angular2-datapool';
+import {ProductData} from '../../providers/product-data';
+import {Event} from 'emiya-angular2-event';
+
 
 @Component({
   selector: 'page-about',
   templateUrl: 'about.html',
+  providers: [ProductData]
 })
 
 export class AboutPage {
@@ -64,27 +68,38 @@ export class AboutPage {
   public shopCart = {goodsMenu: [], totalMoney: 0, totalAmount: 0};
   public showGoodsCart: any;
 
-  constructor(public navCtrl: NavController, private fetch: Fetch, private popoverCtrl: PopoverController, private router: Router, private dataPool: DataPool) {
+  constructor(public navCtrl: NavController, private fetch: Fetch, private popoverCtrl: PopoverController,
+              private router: Router, private dataPool: DataPool, private productData: ProductData) {
     this.heigt = screen.height - 250;
     this.width = screen.width - 90;
-    this.getData();
+    this.productData.getCategory().then(data => {
+      console.log('this.productData.getCategory()',data);
+      this.catagory_new = data;
+    })
+    // this.getData();
     // this.fetch.translateObj2UrlParam()
     this.showGoodsCart = this.showGoods.bind(this);
-    // this.dataPool.request('goods_cart').read('abc').then(data => {
-    //   // this.shopCart = data['goods'];
-    //   console.log(data);
-    // }).catch(err => {
-    //   alert(err);
-    // });
+    this.dataPool.request('goods_cart').read('goodsCart').then(data => {
+      this.shopCart = data['goods'];
+      console.log(data);
+    })
+    Event.subscribe('refreshCount',() => {
+      this.goods = this.productData.fillCartCount(this.goods);
+    })
+  }
 
-    dataPool.request('color').read().then(data => {
-      console.log('[[ooo',data)
-    });
+  getDataFrom() {
+    // console.log('this.productData.getProductInfo(21)',this.productData.getProductInfo(21));
+    // this.productData.getProductInfo(21).then(data => {
+    //   console.log('this.productData.getProductInfo(21) data ()()(',data);
+    // })
+
+    this.productData.fillCartCount()
   }
 
   ionViewDidLeave() {
     console.log('eedededececececececece',this.shopCart);
-    // this.dataPool.request('goods_cart').write('abc', {goods: this.shopCart});
+    // this.dataPool.request('goods_cart').write('goodsCart', {goods: this.shopCart});
   }
 
   select_item(obj1, obj2) {
@@ -107,31 +122,43 @@ export class AboutPage {
     }
     this.shopCart.totalMoney += obj.price;
     this.shopCart.totalAmount++;
-    this.dataPool.request('goods_cart').write('abc', {goods: this.shopCart});
+    this.dataPool.request('goods_cart').write('goodsCart', {goods: this.shopCart});
+    this.dataPool.request('goods_cart').read('goodsCart').then(data => {
+      // this.shopCart = data['goods'];
+      console.log(data);
+    })
+    //
+    // this.dataPool.request('goods_cart').onChange(() => {
+    //   console.log('dataPool onchange about');
+    // })
   }
 
   remove(obj) {
     event.stopPropagation();
     this.shopCart.totalMoney -= obj.price;
     let i = this.shopCart.goodsMenu.indexOf(obj);
+    console.log('errrrrrrer',obj);
+    console.log('errrrrrrer',this.shopCart);
+    console.log('errrrrrrer',i);
     if (obj.count > 1) {
+      console.log('err err ())(')
       this.shopCart.goodsMenu[i].count--;
     } else {
       obj.count--;
       this.shopCart.goodsMenu.splice(i, 1);
     }
     this.shopCart.totalAmount--;
-    this.dataPool.request('goods_cart').write('abc', {goods: this.shopCart});
+    this.dataPool.request('goods_cart').write('goodsCart', {goods: this.shopCart});
   }
 
-  getData() {
-    this.fetch.request({
-      'url': '/food/rest/default/V1/categories',
-      'method': 'get',
-    }).then((data: {data}) => {
-      this.catagory_new = data.data.children_data;
-    })
-  }
+  // getData() {
+  //   this.fetch.request({
+  //     'url': '/food/rest/default/V1/categories',
+  //     'method': 'get',
+  //   }).then((data: {data}) => {
+  //     this.catagory_new = data.data.children_data;
+  //   })
+  // }
 
   select_new(obj) {
     this.selected_index = obj.id;
@@ -141,7 +168,10 @@ export class AboutPage {
     if (obj.children_data.length > 0) {
       this.sub_selected_index = obj.children_data[0].id;
     }
-    this.getProductInfo(category_id);
+    // this.getProductInfo(category_id);
+    this.productData.getProductInfo(category_id).then(data => {
+      this.goods = this.productData.fillCartCount(data);
+    })
     if (obj.children_data.length > 0) {
       this.catagory_item = obj.children_data[0].name;
     } else {
@@ -154,64 +184,67 @@ export class AboutPage {
     // this.getProduct(sub.id).then(data => {
     //   this.getProductList(data);
     // });
-    this.getProductInfo(sub.id);
+    // this.getProductInfo(sub.id);
+    this.productData.getProductInfo(sub.id).then(data => {
+      this.goods = this.productData.fillCartCount(data);
+    })
     this.catagory_item = sub.name;
   }
 
-  getProduct(id) {
-    let category_item = this.fetch.request({
-      'url': '/food/rest/default/V1/categories/' + id + '/products',
-      'method': 'get',
-    }).then((data: {data}) => {
-      console.log('data88888', data.data);
-      return data.data
-    })
-    return category_item;
-  }
+  // getProduct(id) {
+  //   let category_item = this.fetch.request({
+  //     'url': '/food/rest/default/V1/categories/' + id + '/products',
+  //     'method': 'get',
+  //   }).then((data: {data}) => {
+  //     console.log('data88888', data.data);
+  //     return data.data
+  //   })
+  //   return category_item;
+  // }
 
-  getProductList(obj) {
-    this.fetch.request({
-      'url': '/food/rest/default/V1/products',
-      'method': 'get',
-      // 'params': {
-      //   searchCriteria:{
-      //     filter_groups:[
-      //       {
-      //         filters:[
-      //           {"field":"sku","value":"24-MG04","condition_type":"eq"},
-      //           {"field":"sku","value":"WH01","condition_type":"eq"}
-      //         ]
-      //       }
-      //     ]
-      //   }
-      // }
-      params: searchProductsBySkus(obj)
-    }).then((data: {data: {items}}) => {
-      console.log('字段', data);
-      this.goods = data.data.items.map(item => {
-        return this.dataTransfer(item);
-      })
-      // this.goods = data.data.items;
-      // console.log(`2121233333`,this.goods);
-    })
-  }
+  // getProductList(obj) {
+  //   this.fetch.request({
+  //     'url': '/food/rest/default/V1/products',
+  //     'method': 'get',
+  //     // 'params': {
+  //     //   searchCriteria:{
+  //     //     filter_groups:[
+  //     //       {
+  //     //         filters:[
+  //     //           {"field":"sku","value":"24-MG04","condition_type":"eq"},
+  //     //           {"field":"sku","value":"WH01","condition_type":"eq"}
+  //     //         ]
+  //     //       }
+  //     //     ]
+  //     //   }
+  //     // }
+  //     params: searchProductsBySkus(obj)
+  //   }).then((data: {data: {items}}) => {
+  //     console.log('字段', data);
+  //     this.goods = data.data.items.map(item => {
+  //       return this.dataTransfer(item);
+  //     })
+  //     // this.goods = data.data.items;
+  //     // console.log(`2121233333`,this.goods);
+  //   })
+  // }
 
-  dataTransfer(obj) {
-    return {
-      sku: obj.sku,
-      name: obj.name,
-      price: obj.price,
-      img: 'http://192.168.102.28:8000/pub/media/catalog/product' + obj.custom_attributes[1].value,
-      count: 0,
-      type: obj.type_id
-    }
-  }
-
-  getProductInfo(id) {
-    this.getProduct(id).then(data => {
-      this.getProductList(data);
-    })
-  }
+  // dataTransfer(obj) {
+  //   return {
+  //     sku: obj.sku,
+  //     name: obj.name,
+  //     price: obj.price,
+  //     img: 'http://192.168.102.28:8000/pub/media/catalog/product' + obj.custom_attributes[1].value,
+  //     count: 0,
+  //     type: obj.type_id
+  //   }
+  // }
+  //
+  // getProductInfo(id) {
+  //   this.getProduct(id).then(data => {
+  //     this.getProductList(data);
+  //   })
+  // }
 
   chooseSub(son) {
     console.log(son);

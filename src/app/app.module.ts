@@ -11,7 +11,7 @@ import {Router} from 'emiya-ionic2-router';
 import {PopoverPage} from '../pages/goods-menu/goods-menu';
 import {GoodsInfoPage} from '../pages/goods-info/goods-info';
 import {GoodsListPage} from '../pages/goods-list/goods-list';
-import {ShopCartPage} from '../directives/shopcart-footer';
+import {ShopCartPage} from '../directives/shopcart/shopcart-footer';
 import { Fetch } from "emiya-angular2-fetch";
 import {DataPool} from 'emiya-angular2-datapool';
 
