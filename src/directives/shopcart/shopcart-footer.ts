@@ -2,7 +2,7 @@
  * Created by zhuzhui on 2016/11/17.
  */
 import {Component,Input} from '@angular/core';
-import {DataPool} from 'emiya-angular2-datapool';
+import {DataPool,DataPoolHandle} from 'emiya-angular2-datapool';
 
 @Component({
   selector: 'shopCart',

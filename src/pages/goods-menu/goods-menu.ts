@@ -1,7 +1,8 @@
 import {Component} from '@angular/core';
 import {NavController, ViewController, NavParams, AlertController} from 'ionic-angular';
-import {DataPool} from 'emiya-angular2-datapool';
+import {DataPool,DataPoolHandle} from 'emiya-angular2-datapool';
 import {Event} from 'emiya-angular2-event';
+import {PlusReduce} from '../../directives/plus-reduce/plus-reduce';
 
 @Component({
   templateUrl: 'goods-menu.html',
@@ -22,10 +23,15 @@ export class PopoverPage {
         this.shopCart = data['goods'];
         // this.goodsData = this.shopCart.goodsMenu;
         this.shopCart.goodsMenu.map(item => {
-          return item.checkImg = '../../assets/icon/ic_check_black_24px.svg';
+          if(item['selected']) {
+            item.checkImg = '../../assets/icon/ic_check_black_24px.svg';
+          }else {
+            item.checkImg = '../../assets/icon/ic_check_white_24px.svg';
+          }
         })
         // this.totalMoney = this.shopCart.totalMoney;
         // this.totalAmount = this.shopCart.totalAmount;
+        console.log('this.shopCart new',this.shopCart);
       })
     })
 
@@ -86,16 +92,18 @@ export class PopoverPage {
   }
 
   check(obj) {
-    if (obj.checkImg == '../../assets/icon/ic_check_black_24px.svg') {
-      obj.checkImg = '../../assets/icon/ic_check_white_24px.svg';
+    if (obj.selected) {
+      obj.selected = !obj.selected;
+      // obj.checkImg = '../../assets/icon/ic_check_white_24px.svg';
       this.shopCart.totalMoney -= obj.price * obj.count;
       this.shopCart.totalAmount -= obj.count;
-    } else if (obj.checkImg == '../../assets/icon/ic_check_white_24px.svg') {
-      obj.checkImg = '../../assets/icon/ic_check_black_24px.svg';
+    } else {
+      obj.selected = !obj.selected;
+      // obj.checkImg = '../../assets/icon/ic_check_black_24px.svg';
       this.shopCart.totalMoney += obj.price * obj.count;
       this.shopCart.totalAmount += obj.count;
     }
-    // this.dataPool.request('goods_cart').write('goodsCart', {goods: this.shopCart});
+    this.dataPool.request('goods_cart').write('goodsCart', {goods: this.shopCart});
   }
 
   checkAll() {
@@ -146,6 +154,7 @@ export class PopoverPage {
     this.shopCart.totalMoney = 0.00;
     this.shopCart.totalAmount = 0;
     this.dataPool.request('goods_cart').write('goodsCart', {goods: this.shopCart});
+    Event.emit('clearShopcart',{});
     this.close();
   }
 }

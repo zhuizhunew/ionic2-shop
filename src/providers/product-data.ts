@@ -68,12 +68,15 @@ export class ProductData {
       price: obj.price,
       img: 'http://192.168.102.28:8000/pub/media/catalog/product' + obj.custom_attributes[1].value,
       count: 0,
-      type: obj.type_id
+      type: obj.type_id,
+      selected: true
     }
   }
 
   fillCartCount(obj) {
     this.dataPool.request('goods_cart').read('goodsCart').then(data => {
+      this.dataPoolGoods = data['goods'];
+      console.log('this.dataPoolGoods',this.dataPoolGoods);
       obj.map(item => {
         data['goods']['goodsMenu'].map(one => {
           if(item.sku == one.sku) {
@@ -81,8 +84,6 @@ export class ProductData {
           }
         })
       })
-      this.dataPoolGoods = data['goods'];
-      console.log('this.dataPoolGoods',this.dataPoolGoods);
     })
     return obj;
   }

@@ -8,9 +8,10 @@ import {PopoverPage} from '../goods-menu/goods-menu';
 import {GoodsInfoPage} from '../goods-info/goods-info';
 import {GoodsListPage} from '../goods-list/goods-list';
 import {ShopCartPage} from '../../directives/shopcart/shopcart-footer';
-import {DataPool} from 'emiya-angular2-datapool';
+import {DataPool,DataPoolHandle} from 'emiya-angular2-datapool';
 import {ProductData} from '../../providers/product-data';
 import {Event} from 'emiya-angular2-event';
+import {PlusReduce} from '../../directives/plus-reduce/plus-reduce';
 
 
 @Component({
@@ -25,7 +26,7 @@ export class AboutPage {
   public width: any;
   public value: number = 0;
   public goods = [
-    {img: '../../assets/icon/favicon.ico', name: '赣南脐橙', price: 22.00, count: 0},
+    {img: '../../assets/icon/favicon.ico', name: '赣南脐橙', price: 22.00, count: 5},
     {img: '../../assets/icon/favicon.ico', name: '赣南脐橙2', price: 21.00, count: 0},
     {img: '../../assets/icon/favicon.ico', name: '赣南脐橙3', price: 20.00, count: 0},
     {img: '../../assets/icon/favicon.ico', name: '赣南脐橙4', price: 19.00, count: 0},
@@ -86,16 +87,21 @@ export class AboutPage {
     Event.subscribe('refreshCount',() => {
       this.goods = this.productData.fillCartCount(this.goods);
     })
+    Event.subscribe('clearShopcart',() => {
+      this.goods.map(item => {
+        item.count = 0;
+      });
+    })
   }
 
-  getDataFrom() {
+  // getDataFrom() {
     // console.log('this.productData.getProductInfo(21)',this.productData.getProductInfo(21));
     // this.productData.getProductInfo(21).then(data => {
     //   console.log('this.productData.getProductInfo(21) data ()()(',data);
     // })
 
-    this.productData.fillCartCount()
-  }
+    // this.productData.fillCartCount()
+  // }
 
   ionViewDidLeave() {
     console.log('eedededececececececece',this.shopCart);
@@ -110,46 +116,46 @@ export class AboutPage {
     this.catagory_item = obj2.value;
   }
 
-  add(obj) {
-    event.stopPropagation();
-    console.log(obj);
-    if (this.shopCart.goodsMenu.indexOf(obj) > -1) {
-      let i = this.shopCart.goodsMenu.indexOf(obj);
-      this.shopCart.goodsMenu[i].count += 1;
-    } else {
-      obj.count++;
-      this.shopCart.goodsMenu.push(obj);
-    }
-    this.shopCart.totalMoney += obj.price;
-    this.shopCart.totalAmount++;
-    this.dataPool.request('goods_cart').write('goodsCart', {goods: this.shopCart});
-    this.dataPool.request('goods_cart').read('goodsCart').then(data => {
-      // this.shopCart = data['goods'];
-      console.log(data);
-    })
-    //
-    // this.dataPool.request('goods_cart').onChange(() => {
-    //   console.log('dataPool onchange about');
-    // })
-  }
+  // add(obj) {
+  //   event.stopPropagation();
+  //   console.log(obj);
+  //   if (this.shopCart.goodsMenu.indexOf(obj) > -1) {
+  //     let i = this.shopCart.goodsMenu.indexOf(obj);
+  //     this.shopCart.goodsMenu[i].count += 1;
+  //   } else {
+  //     obj.count++;
+  //     this.shopCart.goodsMenu.push(obj);
+  //   }
+  //   this.shopCart.totalMoney += obj.price;
+  //   this.shopCart.totalAmount++;
+  //   this.dataPool.request('goods_cart').write('goodsCart', {goods: this.shopCart});
+  //   this.dataPool.request('goods_cart').read('goodsCart').then(data => {
+  //     // this.shopCart = data['goods'];
+  //     console.log(data);
+  //   })
+  //   //
+  //   // this.dataPool.request('goods_cart').onChange(() => {
+  //   //   console.log('dataPool onchange about');
+  //   // })
+  // }
 
-  remove(obj) {
-    event.stopPropagation();
-    this.shopCart.totalMoney -= obj.price;
-    let i = this.shopCart.goodsMenu.indexOf(obj);
-    console.log('errrrrrrer',obj);
-    console.log('errrrrrrer',this.shopCart);
-    console.log('errrrrrrer',i);
-    if (obj.count > 1) {
-      console.log('err err ())(')
-      this.shopCart.goodsMenu[i].count--;
-    } else {
-      obj.count--;
-      this.shopCart.goodsMenu.splice(i, 1);
-    }
-    this.shopCart.totalAmount--;
-    this.dataPool.request('goods_cart').write('goodsCart', {goods: this.shopCart});
-  }
+  // remove(obj) {
+  //   event.stopPropagation();
+  //   this.shopCart.totalMoney -= obj.price;
+  //   let i = this.shopCart.goodsMenu.indexOf(obj);
+  //   console.log('errrrrrrer',obj);
+  //   console.log('errrrrrrer',this.shopCart);
+  //   console.log('errrrrrrer',i);
+  //   if (obj.count > 1) {
+  //     console.log('err err ())(')
+  //     this.shopCart.goodsMenu[i].count--;
+  //   } else {
+  //     obj.count--;
+  //     this.shopCart.goodsMenu.splice(i, 1);
+  //   }
+  //   this.shopCart.totalAmount--;
+  //   this.dataPool.request('goods_cart').write('goodsCart', {goods: this.shopCart});
+  // }
 
   // getData() {
   //   this.fetch.request({
@@ -246,10 +252,10 @@ export class AboutPage {
   //   })
   // }
 
-  chooseSub(son) {
-    console.log(son);
-    this.son_selected_index = son.id;
-  }
+  // chooseSub(son) {
+  //   console.log(son);
+  //   this.son_selected_index = son.id;
+  // }
 
   showGoods() {
     let popover = this.popoverCtrl.create(PopoverPage, {data: this.shopCart}, {

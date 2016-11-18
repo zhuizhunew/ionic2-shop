@@ -29,15 +29,16 @@
         <p style="border-bottom: none;float: left;position: relative;width: 75%;min-height: 80px">
           <span style="padding-left: 10px;border-bottom: none">{{obj.name}}</span>
           <span style="padding-left: 10px;border-bottom: none;display: inline-block" *ngIf="obj.price >0">${{ obj.price }}</span>
-          <span style="position: absolute;right: 0;bottom: 0;border-bottom: none" *ngIf="obj.price >0">
-             <img src="../../assets/icon/ic_remove_black_24px.svg" alt=""
-                  style="border: 1px solid #222;border-radius: 50%;vertical-align: sub;width: 20px;" *ngIf="obj.count>0"
-                  (click)="remove(obj)">
-             <em *ngIf="obj.count>0" style="font-size: 20px;font-style: normal">{{ obj.count }}</em>
-            <img src="../../assets/icon/ic_add_black_24px.svg" alt=""
-                 style="border: 1px solid #222;border-radius: 50%;vertical-align: sub;width: 20px"
-                 (click)="add(obj)">
-          </span>
+          <!--<span style="position: absolute;right: 0;bottom: 0;border-bottom: none" *ngIf="obj.price >0">-->
+             <!--<img src="../../assets/icon/ic_remove_black_24px.svg" alt=""-->
+                  <!--style="border: 1px solid #222;border-radius: 50%;vertical-align: sub;width: 20px;" *ngIf="obj.count>0"-->
+                  <!--(click)="remove(obj)">-->
+             <!--<em *ngIf="obj.count>0" style="font-size: 20px;font-style: normal">{{ obj.count }}</em>-->
+            <!--<img src="../../assets/icon/ic_add_black_24px.svg" alt=""-->
+                 <!--style="border: 1px solid #222;border-radius: 50%;vertical-align: sub;width: 20px"-->
+                 <!--(click)="add(obj)">-->
+          <!--</span>-->
+          <plusReduce [product]="obj"></plusReduce>
         </p>
       </div>
     </ion-scroll>

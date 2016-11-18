@@ -13,7 +13,8 @@ import {GoodsInfoPage} from '../pages/goods-info/goods-info';
 import {GoodsListPage} from '../pages/goods-list/goods-list';
 import {ShopCartPage} from '../directives/shopcart/shopcart-footer';
 import { Fetch } from "emiya-angular2-fetch";
-import {DataPool} from 'emiya-angular2-datapool';
+import {DataPool,DataPoolHandle} from 'emiya-angular2-datapool';
+import {PlusReduce} from '../directives/plus-reduce/plus-reduce';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {DataPool} from 'emiya-angular2-datapool';
     PopoverPage,
     GoodsInfoPage,
     GoodsListPage,
-    ShopCartPage
+    ShopCartPage,
+    PlusReduce
   ],
   imports: [
     IonicModule.forRoot(MyApp, {tabsPlacement: 'bottom'}, {
@@ -49,7 +51,8 @@ import {DataPool} from 'emiya-angular2-datapool';
     PopoverPage,
     GoodsInfoPage,
     GoodsListPage,
-    ShopCartPage
+    ShopCartPage,
+    PlusReduce
   ],
   providers: [Router,Fetch,DataPool]
 })

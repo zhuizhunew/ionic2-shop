@@ -25,6 +25,7 @@
     "@ionic/storage": "1.1.6",
     "emiya-angular2-datapool": "^1.0.0",
     "emiya-angular2-fetch": "^1.0.3",
+    "emiya-ionic2-router": "^1.1.2",
     "ionic-angular": "2.0.0-rc.2",
     "ionic-native": "2.2.3",
     "ionicons": "3.0.0",

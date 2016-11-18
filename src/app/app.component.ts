@@ -4,7 +4,7 @@ import {StatusBar, Splashscreen} from 'ionic-native';
 import {TabsPage} from '../pages/tabs/tabs';
 import {Router} from 'emiya-ionic2-router';
 import {Routes} from '../configs/routes';
-import {DataPool} from 'emiya-angular2-datapool';
+import {DataPool,DataPoolHandle} from 'emiya-angular2-datapool';
 import {LoadAttribute} from '../providers/load-attribute';
 
 

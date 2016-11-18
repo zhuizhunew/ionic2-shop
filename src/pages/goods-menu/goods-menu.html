@@ -18,15 +18,16 @@
       <span style="padding-left: 10px;border-bottom: none">{{obj.name}}</span>
       <p style="margin: 0;position: absolute;bottom: 0;width: 100%">
         <span style="padding-left: 10px;border-bottom: none">${{ obj.price * obj.count }}</span>
-        <span style="border-bottom: none;float: right;">
-             <img src="../../assets/icon/ic_remove_black_24px.svg" alt=""
-                  style="border: 1px solid #222;border-radius: 50%;vertical-align: sub;width: 20px" *ngIf="obj.count>0"
-                  (click)="reduce(obj)">
-             <em *ngIf="obj.count>0" style="font-size: 20px;font-style: normal">{{ obj.count }}</em>
-            <img src="../../assets/icon/ic_add_black_24px.svg" alt=""
-                 style="border: 1px solid #222;border-radius: 50%;vertical-align: sub;width: 20px"
-                 (click)="plus(obj)">
-          </span>
+        <!--<span style="border-bottom: none;float: right;">-->
+             <!--<img src="../../assets/icon/ic_remove_black_24px.svg" alt=""-->
+                  <!--style="border: 1px solid #222;border-radius: 50%;vertical-align: sub;width: 20px" *ngIf="obj.count>0"-->
+                  <!--(click)="reduce(obj)">-->
+             <!--<em *ngIf="obj.count>0" style="font-size: 20px;font-style: normal">{{ obj.count }}</em>-->
+            <!--<img src="../../assets/icon/ic_add_black_24px.svg" alt=""-->
+                 <!--style="border: 1px solid #222;border-radius: 50%;vertical-align: sub;width: 20px"-->
+                 <!--(click)="plus(obj)">-->
+          <!--</span>-->
+        <plusReduce [product]="obj"></plusReduce>
       </p>
     </div>
   </div>

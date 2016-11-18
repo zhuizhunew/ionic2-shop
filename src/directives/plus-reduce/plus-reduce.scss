@@ -1,0 +1,22 @@
+.plus-reduce {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  border-bottom: none !important;
+  .reduce {
+    border: 1px solid #222;
+    border-radius: 50%;
+    vertical-align: sub;
+    width: 20px;
+  }
+  .count {
+    font-size: 20px;
+    font-style: normal
+  }
+  .plus {
+    border: 1px solid #222;
+    border-radius: 50%;
+    vertical-align: sub;
+    width: 20px
+  }
+}
