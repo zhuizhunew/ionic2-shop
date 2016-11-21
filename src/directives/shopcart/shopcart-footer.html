@@ -8,7 +8,7 @@
       <span *ngIf="shopCart.totalAmount == 0">购物车是空的</span>
       <span *ngIf="shopCart.totalAmount !== 0" style="margin-left: 30px">${{ shopCart.totalMoney }}</span>
     </button><button [ngClass]="{item2:shopCart.totalMoney==0,item3:shopCart.totalMoney!==0}"
-            [disabled]="shopCart.totalMoney == 0" (click)="getProductList()">去结算
+            [disabled]="shopCart.totalMoney == 0" (click)="goGoodsOrder()">去结算
     </button>
   </div>
 </ion-footer>

@@ -1,3 +1,14 @@
 page-goods-info {
-
+  .goods-info-img-height {
+    text-align: center;
+    img {
+      height: 200px;
+    }
+  }
+  .content-slide {
+    ul {
+      text-align: left;
+      font-size: 14px;
+    }
+  }
 }

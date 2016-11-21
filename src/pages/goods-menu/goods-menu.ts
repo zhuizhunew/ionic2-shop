@@ -58,6 +58,7 @@ export class PopoverPage {
   }
 
   plus(obj) {
+    console.log(obj);
     if (obj.checkImg == '../../assets/icon/ic_check_white_24px.svg') {
       this.check(obj);
     }

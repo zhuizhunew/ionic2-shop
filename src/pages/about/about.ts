@@ -71,7 +71,7 @@ export class AboutPage {
 
   constructor(public navCtrl: NavController, private fetch: Fetch, private popoverCtrl: PopoverController,
               private router: Router, private dataPool: DataPool, private productData: ProductData) {
-    this.heigt = screen.height - 250;
+    this.heigt = screen.height - 50;
     this.width = screen.width - 90;
     this.productData.getCategory().then(data => {
       console.log('this.productData.getCategory()',data);
@@ -85,12 +85,20 @@ export class AboutPage {
       console.log(data);
     })
     Event.subscribe('refreshCount',() => {
+      console.log('refreshCount 15482 8wee')
       this.goods = this.productData.fillCartCount(this.goods);
     })
     Event.subscribe('clearShopcart',() => {
       this.goods.map(item => {
         item.count = 0;
       });
+    })
+
+    Event.subscribe('goodListCountPlus', () => {
+      this.goods = this.productData.fillCartCount(this.goods);
+    })
+    Event.subscribe('goodsListCountReduce', () => {
+      this.goods = this.productData.fillCartCount(this.goods);
     })
   }
 

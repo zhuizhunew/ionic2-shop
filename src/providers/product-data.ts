@@ -69,20 +69,51 @@ export class ProductData {
       img: 'http://192.168.102.28:8000/pub/media/catalog/product' + obj.custom_attributes[1].value,
       count: 0,
       type: obj.type_id,
-      selected: true
+      selected: true,
+      category: 1
     }
   }
 
   fillCartCount(obj) {
+    if(obj.length) {
+      console.log('return obj',obj);
+      this.dataPool.request('goods_cart').read('goodsCart').then(data => {
+        this.dataPoolGoods = data['goods'];
+        console.log('this.dataPoolGoods',this.dataPoolGoods);
+        obj.map(item => {
+          data['goods']['goodsMenu'].map(one => {
+            if(item.sku == one.sku) {
+              item.count = one.count;
+            }
+          })
+        })
+      })
+      return obj;
+    }else {
+      console.log('return obj123',obj);
+      this.dataPool.request('goods_cart').read('goodsCart').then(data => {
+        this.dataPoolGoods = data['goods'];
+        console.log('this.dataPoolGoods 不是数组',this.dataPoolGoods);
+        data['goods']['goodsMenu'].map(one => {
+          console.log('one 234 4443',one);
+            if(obj.sku == one.sku) {
+              obj.count = one.count;
+            }
+          })
+      })
+      console.log('不是数组',obj);
+      return obj;
+    }
+  }
+
+  //color,size//////
+  fillCartCount_size(obj) {
     this.dataPool.request('goods_cart').read('goodsCart').then(data => {
       this.dataPoolGoods = data['goods'];
-      console.log('this.dataPoolGoods',this.dataPoolGoods);
-      obj.map(item => {
-        data['goods']['goodsMenu'].map(one => {
-          if(item.sku == one.sku) {
-            item.count = one.count;
-          }
-        })
+      data['goods']['goodsMenu'].map(one => {
+        if(obj.goodsSku == one.sku.split('-')[0]) {
+          obj.count = one.count;
+        }
       })
     })
     return obj;

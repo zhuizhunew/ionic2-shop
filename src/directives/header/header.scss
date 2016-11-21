@@ -1,0 +1,12 @@
+.goods-header {
+  span {
+    &:nth-child(1) {
+      width: 40px;
+      display: inline-block;
+      height: 44px;
+      img {
+        margin: 10px;
+      }
+    }
+  }
+}

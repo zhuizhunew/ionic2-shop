@@ -1,0 +1,86 @@
+page-goods-order {
+  .goods-order {
+    border-bottom: 1px solid #eeeeee;
+    min-height: 65px;
+    position: relative;
+    img {
+      float: left;
+      &:nth-child(1) {
+        width: 30px;
+        border: 1px solid #222222;
+        border-radius: 50%;
+      }
+      &:nth-child(2) {
+        width: 50px;
+        vertical-align: top;
+      }
+    }
+    .name-price {
+      p {
+        margin: 5px;
+        &:nth-child(2) {
+          span {
+            &:nth-child(2) {
+              margin-left: 20px;
+            }
+          }
+        }
+      }
+      .total-money {
+        position: absolute;
+        right: 0;
+      }
+    }
+  }
+  .goods-order-footer {
+    height: 44px;
+    line-height: 44px;
+    border-top: 1px solid #dddddd;
+    span {
+      display: inline-block;
+      &:nth-child(1) {
+        width: 60%;
+        text-align: right;
+        padding-right: 10px;
+      }
+      &:nth-child(2) {
+        width: 40%;
+        background-color: #ff0000;
+        color: #ffffff;
+        text-align: center;
+      }
+    }
+  }
+  .order-page {
+    ion-header {
+      height: 44px;
+      border-bottom: 1px solid #dddddd;
+      background-color: #ffffff;
+      span {
+        &:nth-child(1) {
+          z-index:99;
+        }
+        &:nth-child(2) {
+          display: inline-block;
+          width: 100%;
+          text-align: center;
+          height: 44px;
+          line-height: 44px;
+          position: absolute;
+        }
+      }
+    }
+  }
+  .shop-cart {
+    background-color: #fff;
+    height: 44px;
+    line-height: 44px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+    font-size: 17px;
+    font-weight: 600;
+  }
+  .have-margin-top {
+    margin-top: 44px;
+  }
+}

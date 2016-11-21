@@ -1,0 +1,31 @@
+<!--<ion-header>-->
+
+  <!--<ion-navbar>-->
+    <!--<ion-title>goodsOrder</ion-title>-->
+  <!--</ion-navbar>-->
+
+<!--</ion-header>-->
+<header title="订单结算" class="order-page" *ngIf="canGoBack()"></header>
+<ion-header *ngIf="!canGoBack()" class="shop-cart">
+  <span>全部商品</span>
+</ion-header>
+
+<ion-content padding [ngClass]="canGoBack()?'have-margin-top':''">
+  <div *ngFor="let obj of goodsOrder.goodsMenu" class="goods-order">
+    <img src="{{ obj.checkImg }}" alt="" (click)="check(obj)" *ngIf=" canGoBack()">
+    <img src="{{ obj.img}}" alt="">
+    <div class="name-price">
+      <p>{{ obj.name }}</p>
+      <p>
+        <span>Count: &nbsp;&nbsp;×{{ obj.count }}</span>
+        <span>Price: &nbsp;&nbsp;${{ obj.price }}</span>
+      </p>
+      <span class="total-money">${{ obj.count * obj.price }}</span>
+    </div>
+  </div>
+</ion-content>
+<ion-footer class="goods-order-footer" *ngIf="canGoBack()">
+  <div>
+    <span>应付：${{goodsOrder.totalMoney}}</span><span>提交订单</span>
+  </div>
+</ion-footer>

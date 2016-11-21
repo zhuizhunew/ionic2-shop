@@ -40,11 +40,16 @@ export class PlusReduce {
     this.shopCart.totalMoney += obj.price;
     this.shopCart.totalAmount++;
     this.dataPool.request('goods_cart').write('goodsCart', {goods: this.shopCart});
-    Event.emit('refreshCount',{});
+    if(obj['category'] == 1) {
+      Event.emit('refreshCount',{});
+    }else {
+      Event.emit('goodListCountPlus',{});
+    }
     // obj.count ++;
   }
 
   reduce(obj) {
+
     event.stopPropagation();
     let sku = [];
     this.shopCart.goodsMenu.map((item) => {
@@ -60,6 +65,10 @@ export class PlusReduce {
     this.shopCart.totalMoney -= obj.price;
     this.shopCart.totalAmount--;
     this.dataPool.request('goods_cart').write('goodsCart', {goods: this.shopCart});
-    Event.emit('refreshCount',{});
+    if(obj['category'] == 1) {
+      Event.emit('refreshCount',{});
+    }else {
+      Event.emit('goodsListCountReduce',{});
+    }
   }
 }

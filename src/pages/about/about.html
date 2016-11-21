@@ -1,13 +1,13 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      About
+      Goods List
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <div style="height: 150px;background-color: #0c60ee"></div>
+  <!--<div style="height: 150px;background-color: #0c60ee"></div>-->
   <ion-scroll scrollY="true" style="background-color: #eeeeee;width: 90px;display: inline-block"
               [ngStyle]="{'height.px': heigt}">
     <div *ngFor="let item of catagory_new">
@@ -57,4 +57,4 @@
     <!--</button>-->
   <!--</div>-->
 <!--</ion-footer>-->
-<shopCart [show]="showGoodsCart"></shopCart>
+<shopCart></shopCart>
