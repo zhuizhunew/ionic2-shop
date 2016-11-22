@@ -13,11 +13,11 @@ import {Http} from '@angular/http';
 export class HomePage {
 
   constructor(public navCtrl: NavController,private platform: Platform, private data: Data, private http: Http) {
-    if (this.platform.is('ipad')) {
-      console.log("I'm an iOS device!");
-    }else {
-      console.log('not an IOS device');
-    }
+    // if (this.platform.is('ipad')) {
+    //   console.log("I'm an iOS device!");
+    // }else {
+    //   console.log('not an IOS device');
+    // }
   }
 
   goLogin() {

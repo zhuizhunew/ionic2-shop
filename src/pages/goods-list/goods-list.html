@@ -40,9 +40,9 @@
     <div class="goods-num">
       <span>Qty</span>
       <span>
-        <img src="../../assets/icon/ic_remove_black_24px.svg" alt="" *ngIf="goodsInfo.count > 0" (click)="reduce()">
+        <img src="assets/icon/ic_remove_black_24px.svg" alt="" *ngIf="goodsInfo.count > 0" (click)="reduce()">
         <em *ngIf="goodsInfo.count > 0">{{ goodsInfo.count }}</em>
-        <img src="../../assets/icon/ic_add_black_24px.svg" alt="" (click)="plus()">
+        <img src="assets/icon/ic_add_black_24px.svg" alt="" (click)="plus()">
       </span>
       <!--<plusReduce [product]="goodsInfo"></plusReduce>-->
     </div>
@@ -52,28 +52,31 @@
     <span [ngClass]="info_selected == 1? 'selected':''" (click)="slideToInfo(1)">More Information</span>
     <span [ngClass]="info_selected == 2? 'selected':''" (click)="slideToInfo(2)">Reviews</span>
   </div>
-  <ion-slides class="content-slide" #infoSlider>
+  <ion-slides class="content-slide" #infoSlider (ionDidChange)="onSlideChanged()">
     <ion-slide>
       <div [innerHTML]="goodsDetail"></div>
     </ion-slide>
     <ion-slide>
       <p>
-        <span>Style</span>
-        <span *ngIf="goodsStyle.length > 0"><span *ngFor="let obj of goodsStyle">{{ obj }}&nbsp;&nbsp;</span></span>
-        <span *ngIf="goodsStyleBottom.length > 0"><span *ngFor="let obj of goodsStyleBottom">{{ obj }}&nbsp;&nbsp;</span></span>
+        <span class="title">Style</span>
+        <span *ngIf="goodsStyle.length > 0" class="content"><span *ngFor="let obj of goodsStyle">{{ obj }}&nbsp;&nbsp;</span></span>
+        <span *ngIf="goodsStyleBottom.length > 0" class="content"><span *ngFor="let obj of goodsStyleBottom">{{ obj }}&nbsp;&nbsp;</span></span>
       </p>
       <p>
-        <span>Material</span>
-        <span *ngFor="let obj of goodsMaterial">{{ obj }}&nbsp;&nbsp;</span>
+        <span class="title">Material</span>
+        <span *ngFor="let obj of goodsMaterial" class="content">{{ obj }}&nbsp;&nbsp;</span>
       </p>
       <p>
-        <span>Pattern</span>
-        <span *ngFor="let obj of goodsPattern">{{ obj }}&nbsp;&nbsp;</span>
+        <span class="title">Pattern</span>
+        <span *ngFor="let obj of goodsPattern" class="content">{{ obj }}&nbsp;&nbsp;</span>
       </p>
       <p>
-        <span>Climate</span>
-        <span *ngFor="let obj of goodsClimate">{{ obj }}&nbsp;&nbsp;</span>
+        <span class="title">Climate</span>
+        <span *ngFor="let obj of goodsClimate" class="content">{{ obj }}&nbsp;&nbsp;</span>
       </p>
+    </ion-slide>
+    <ion-slide>
+
     </ion-slide>
   </ion-slides>
 </ion-content>

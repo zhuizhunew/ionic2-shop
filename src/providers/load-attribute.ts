@@ -107,12 +107,22 @@ export class LoadAttribute {
     this.dataPool.request('material').write('material', {});
     this.dataPool.request('style_general').write('style_general', {});
     this.dataPool.request('style_bottom').write('style_bottom', {});
-    this.dataPool.request('goods_cart').write('goodsCart', {goods:{goodsMenu: [], totalMoney: 0, totalAmount: 0}});
+    this.dataPool.request('goods_cart').read().then(data => {
+      if(data['goodsCart'] == undefined || data['goodsCart']['goods']['goodsMenu'].length == 0) {
+        this.dataPool.request('goods_cart').write('goodsCart', {goods:{goodsMenu: [], totalMoney: 0, totalAmount: 0, selectedGoodsAmount: 0}});
+      }
+    })
+    // this.dataPool.request('goods_cart').write('goodsCart', {goods:{goodsMenu: [], totalMoney: 0, totalAmount: 0}});
     // this.dataPool.request('size').read('0').then(data => {
     //   console.log('datapool', data);
     // });
   }
 }
+
+
+
+
+
 
 
 

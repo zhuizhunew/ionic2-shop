@@ -1,5 +1,5 @@
 <span *ngIf="product.price >0" class="plus-reduce">
-  <img src="../../assets/icon/ic_remove_black_24px.svg" alt="" class="reduce" *ngIf="product.count>0" (click)="reduce(product)">
+  <img src="assets/icon/ic_remove_black_24px.svg" alt="" class="reduce" *ngIf="product.count>0" (click)="reduce(product)">
   <em *ngIf="product.count>0" class="count">{{ product.count }}</em>
-  <img src="../../assets/icon/ic_add_black_24px.svg" alt="" class="plus" (click)="plus(product)">
+  <img src="assets/icon/ic_add_black_24px.svg" alt="" class="plus" (click)="plus(product)">
 </span>

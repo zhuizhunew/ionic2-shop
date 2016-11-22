@@ -5,7 +5,7 @@
     <span>全选(已选{{ shopCart.totalAmount }}件)</span>
     </span>
     <span (click)="clearAllGoods()">
-      <img src="../../assets/icon/ic_delete_black_24px.svg" alt="" style="vertical-align: middle">
+      <img src="assets/icon/ic_delete_black_24px.svg" alt="" style="vertical-align: middle">
       <span>清空购物车</span>
     </span>
   </div>
@@ -13,7 +13,7 @@
     <img src="{{ obj.checkImg }}" alt=""
          style="vertical-align: top;float: left;margin: 17px 10px 0 0;border: 1px solid #222;border-radius: 50%"
          (click)="check(obj)">
-    <img src="{{ obj.img }}" alt="" style="vertical-align: top;float: left;width: 50px;">
+    <img src="{{ obj.img?obj.img: 'http://192.168.102.28:8000/pub/media/catalog/product/w/b/wb03-green_main.jpg' }}" alt="" style="vertical-align: top;float: left;width: 50px;">
     <div style="border-bottom: none;float: left;position: relative;width: 75%;min-height: 60px">
       <span style="padding-left: 10px;border-bottom: none">{{obj.name}}</span>
       <p style="margin: 0;position: absolute;bottom: 0;width: 100%">

@@ -22,26 +22,28 @@ export class GoodsOrderPage {
   public canGoBack:any;
 
   constructor(public navCtrl: NavController, private dataPool: DataPool, private router: Router) {
-    this.dataPool.request('goods_cart').read('goodsCart').then(data => {
-      this.goodsOrder = data['goods'];
-      console.log('this.goodsOrder',this.goodsOrder);
+    this.dataPool.request('goods_cart').onChange(() => {
+      this.dataPool.request('goods_cart').read('goodsCart').then(data => {
+        this.goodsOrder = data['goods'];
+        // console.log('this.goodsOrder',this.goodsOrder);
+      })
     })
     this.canGoBack = this.router.canGoBack;
-    console.log('this.router.canGoBack',this.router.canGoBack)
+    // console.log('this.router.canGoBack',this.router.canGoBack)
   }
 
-  ionViewDidLoad() {
+  ionViewDidEnter() {
 
   }
 
   check(obj) {
-    console.log(obj);
+    // console.log(obj);
     if(obj.selected) {
-      obj.checkImg = '../../assets/icon/ic_check_white_24px.svg';
+      obj.checkImg = 'assets/icon/ic_check_white_24px.svg';
       obj.selected = !obj.selected;
       this.goodsOrder.totalMoney -= obj.count * obj.price;
     }else {
-      obj.checkImg = '../../assets/icon/ic_check_black_24px.svg';
+      obj.checkImg = 'assets/icon/ic_check_black_24px.svg';
       obj.selected = !obj.selected;
       this.goodsOrder.totalMoney += obj.count * obj.price;
     }

@@ -1,12 +1,12 @@
 .about-page-footer {
   height: 50px;
-  border-top:1px solid #dddddd;
+  border-top: 1px solid #dddddd;
   .item {
     display: inline-block;
     height: 50px;
     line-height: 50px;
-    width:70%;
-    opacity: 1!important;
+    width: 70%;
+    opacity: 1 !important;
     img {
       vertical-align: middle;
     }
@@ -17,7 +17,7 @@
     height: 50px;
     line-height: 50px;
     text-align: center;
-    width:30%;
+    width: 30%;
     opacity: 1;
   }
   .item3 {
@@ -26,21 +26,22 @@
     height: 50px;
     line-height: 50px;
     text-align: center;
-    width:30%;
+    width: 30%;
     opacity: 1;
   }
 }
 
 .goodsMenu {
+  position: relative !important;
   ion-backdrop {
-    opacity: 0.5!important;
-    height:567px!important;
+    opacity: 0.5 !important;
+    //height:567px!important;
   }
   .popover-content {
-    left:0!important;
-    bottom: 99px !important;
-    top: auto!important;
+    left: 0 !important;
+    bottom: 0 !important;
+    top: auto !important;
     width: 100%;
-    border-radius: 0!important;
+    border-radius: 0 !important;
   }
 }

@@ -20,3 +20,7 @@
   width: $width;
   height: $heigh;
 }
+
+.footer-md::before, .tabs-md[tabsPlacement="bottom"] > .tabbar::before {
+  background-image: none!important;
+}

@@ -28,11 +28,14 @@
   </div>
   <div class="goods-info-more">
     <span [ngClass]="info_selected == 0? 'selected':''" (click)="slideToInfo(0)">Details</span>
-    <span [ngClass]="info_selected == 2? 'selected':''" (click)="slideToInfo(1)">Reviews</span>
+    <span [ngClass]="info_selected == 1? 'selected':''" (click)="slideToInfo(1)">Reviews</span>
   </div>
-  <ion-slides class="content-slide">
+  <ion-slides class="content-slide" #infoSlider (ionDidChange)="onSlideChanged()">
     <ion-slide>
       <div [innerHTML]="goodsInfo.detail"></div>
+    </ion-slide>
+    <ion-slide>
+
     </ion-slide>
   </ion-slides>
 </ion-content>

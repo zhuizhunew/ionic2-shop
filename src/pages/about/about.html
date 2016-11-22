@@ -1,12 +1,14 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>
-      Goods List
-    </ion-title>
-  </ion-navbar>
-</ion-header>
+<!--<ion-header>-->
+  <!--<ion-navbar>-->
+    <!--<ion-title>-->
+      <!--Goods List-->
+    <!--</ion-title>-->
+  <!--</ion-navbar>-->
+<!--</ion-header>-->
 
-<ion-content>
+<header title="Goods List" class="order-page"></header>
+
+<ion-content style="margin-top: 44px">
   <!--<div style="height: 150px;background-color: #0c60ee"></div>-->
   <ion-scroll scrollY="true" style="background-color: #eeeeee;width: 90px;display: inline-block"
               [ngStyle]="{'height.px': heigt}">
@@ -20,7 +22,7 @@
       </p>
     </div>
   </ion-scroll>
-  <div style="width: 200px;display: inline-block">
+  <div style="width: 200px;display: inline-block;margin-bottom: 90px">
     <p style="background-color: #eeeeee;margin: 0" id="title1" [ngStyle]="{'width.px': width}">{{ catagory_item }}</p>
     <ion-scroll style="display: inline-block" scrollY="true" id="title"
                 [ngStyle]="{'height.px': heigt,'width.px': width}">

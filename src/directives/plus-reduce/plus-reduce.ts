@@ -13,7 +13,7 @@ import {Event} from 'emiya-angular2-event';
 export class PlusReduce {
 
   @Input() product = {price: 0, count: 0};
-  public shopCart = {goodsMenu: [], totalMoney: 0, totalAmount: 0};
+  public shopCart = {goodsMenu: [], totalMoney: 0, totalAmount: 0, selectedGoodsAmount: 0};
 
   constructor(private dataPool: DataPool) {
     dataPool.request('goods_cart').onChange(() => {
@@ -24,51 +24,55 @@ export class PlusReduce {
   }
 
   plus(obj) {
-    console.log('plus',obj);
+    // console.log('plus',obj);
     event.stopPropagation();
     let sku = [];
     this.shopCart.goodsMenu.map((item) => {
       sku.push(item['sku']);
     })
-    if(sku.indexOf(obj['sku']) > -1) {
+    if (sku.indexOf(obj['sku']) > -1) {
       let i = sku.indexOf(obj['sku']);
       this.shopCart.goodsMenu[i].count++;
-    }else {
+    } else {
       obj.count++;
       this.shopCart.goodsMenu.push(obj);
     }
     this.shopCart.totalMoney += obj.price;
     this.shopCart.totalAmount++;
+    this.shopCart.selectedGoodsAmount++;
     this.dataPool.request('goods_cart').write('goodsCart', {goods: this.shopCart});
-    if(obj['category'] == 1) {
-      Event.emit('refreshCount',{});
-    }else {
-      Event.emit('goodListCountPlus',{});
+    if (obj['category'] == 1) {
+      Event.emit('refreshCount', {});
+    } else {
+      Event.emit('goodListCountPlus', {});
     }
     // obj.count ++;
   }
 
   reduce(obj) {
-
     event.stopPropagation();
     let sku = [];
     this.shopCart.goodsMenu.map((item) => {
       sku.push(item['sku']);
     })
     let i = sku.indexOf(obj['sku']);
-    if(obj.count > 1) {
+    if (obj.count > 1) {
       this.shopCart.goodsMenu[i].count--;
-    }else {
-      obj.count --;
+    } else {
+      obj.count--;
       this.shopCart.goodsMenu.splice(i, 1);
     }
     this.shopCart.totalMoney -= obj.price;
     this.shopCart.totalAmount--;
+    this.shopCart.selectedGoodsAmount--;
     this.dataPool.request('goods_cart').write('goodsCart', {goods: this.shopCart});
-    if(obj['category'] == 1) {
-      Event.emit('refreshCount',{});
-    }else {
-      Event.emit('goodsListCountReduce',{});
+    if (obj['category'] == 1) {
+      Event.emit('refreshCount', {});
+    } else {
+      Event.emit('goodsListCountReduce', {});
+    }
+    if (this.shopCart.goodsMenu.length == 0) {
+      Event.emit('noGoods', {});
     }
   }
 }

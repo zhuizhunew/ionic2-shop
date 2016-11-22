@@ -1,19 +1,19 @@
-page-goods-order {
+//page-goods-order {
   .goods-order {
     border-bottom: 1px solid #eeeeee;
     min-height: 65px;
     position: relative;
     img {
       float: left;
-      &:nth-child(1) {
-        width: 30px;
-        border: 1px solid #222222;
-        border-radius: 50%;
-      }
-      &:nth-child(2) {
-        width: 50px;
-        vertical-align: top;
-      }
+    }
+    .check {
+      width: 30px;
+      border: 1px solid #222222;
+      border-radius: 50%;
+    }
+    .goods-img-size {
+      width: 50px;
+      vertical-align: top;
     }
     .name-price {
       p {
@@ -33,8 +33,8 @@ page-goods-order {
     }
   }
   .goods-order-footer {
-    height: 44px;
-    line-height: 44px;
+    height: 50px;
+    line-height: 50px;
     border-top: 1px solid #dddddd;
     span {
       display: inline-block;
@@ -58,7 +58,7 @@ page-goods-order {
       background-color: #ffffff;
       span {
         &:nth-child(1) {
-          z-index:99;
+          z-index: 99;
         }
         &:nth-child(2) {
           display: inline-block;
@@ -67,6 +67,7 @@ page-goods-order {
           height: 44px;
           line-height: 44px;
           position: absolute;
+          padding-right: 40px;
         }
       }
     }
@@ -83,4 +84,4 @@ page-goods-order {
   .have-margin-top {
     margin-top: 44px;
   }
-}
+//}

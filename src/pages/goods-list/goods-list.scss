@@ -110,18 +110,16 @@
 .content-slide {
   height: auto !important;
   ion-slide {
-    padding: 10px;
+    padding: 5px;
     p {
       text-align: left;
       margin: 5px;
       font-size: 14px;
-      span {
-        &:nth-child(1) {
-          font-weight: bold;
-        }
-        &:nth-child(2) {
-          margin-left: 20px;
-        }
+      .title {
+        font-weight: bold;
+      }
+      .content {
+        margin-left: 5px;
       }
     }
   }
@@ -135,6 +133,12 @@
   ion-footer {
     bottom: 0!important;
   }
+}
+
+
+.header-md::after, .tabs-md[tabsPlacement="top"] > .tabbar::after, .footer-md::before,
+.tabs-md[tabsPlacement="bottom"] > .tabbar::before {
+  background-image: none!important;
 }
 
 

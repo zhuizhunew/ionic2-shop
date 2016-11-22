@@ -12,9 +12,8 @@ import 'rxjs/add/operator/map';
 export class Data {
 
   constructor(public http: Http) {
-    console.log('Hello Data Provider');
+    // console.log('Hello Data Provider');
   }
-
   send() {
     console.log('ionic g provider data')
   }

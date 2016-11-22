@@ -12,6 +12,8 @@ import {DataPool,DataPoolHandle} from 'emiya-angular2-datapool';
 import {ProductData} from '../../providers/product-data';
 import {Event} from 'emiya-angular2-event';
 import {PlusReduce} from '../../directives/plus-reduce/plus-reduce';
+import {Header} from '../../directives/header/header';
+
 
 
 @Component({
@@ -26,22 +28,22 @@ export class AboutPage {
   public width: any;
   public value: number = 0;
   public goods = [
-    {img: '../../assets/icon/favicon.ico', name: '赣南脐橙', price: 22.00, count: 5},
-    {img: '../../assets/icon/favicon.ico', name: '赣南脐橙2', price: 21.00, count: 0},
-    {img: '../../assets/icon/favicon.ico', name: '赣南脐橙3', price: 20.00, count: 0},
-    {img: '../../assets/icon/favicon.ico', name: '赣南脐橙4', price: 19.00, count: 0},
-    {img: '../../assets/icon/favicon.ico', name: '赣南脐橙5', price: 18.00, count: 0},
-    {img: '../../assets/icon/favicon.ico', name: '赣南脐橙6', price: 17.00, count: 0},
-    {img: '../../assets/icon/favicon.ico', name: '赣南脐橙7', price: 18.80, count: 0},
+    {img: 'assets/icon/favicon.ico', name: '赣南脐橙', price: 22.00, count: 0, sku: 'qc1', selected: true},
+    {img: 'assets/icon/favicon.ico', name: '赣南脐橙2', price: 21.00, count: 0, sku: 'qc2', selected: true},
+    {img: 'assets/icon/favicon.ico', name: '赣南脐橙3', price: 20.00, count: 0, sku: 'qc3', selected: true},
+    {img: 'assets/icon/favicon.ico', name: '赣南脐橙4', price: 19.00, count: 0, sku: 'qc4', selected: true},
+    {img: 'assets/icon/favicon.ico', name: '赣南脐橙5', price: 18.00, count: 0, sku: 'qc5', selected: true},
+    {img: 'assets/icon/favicon.ico', name: '赣南脐橙6', price: 17.00, count: 0, sku: 'qc6', selected: true},
+    {img: 'assets/icon/favicon.ico', name: '赣南脐橙7', price: 18.80, count: 0, sku: 'qc7', selected: true},
   ];
   public goods1 = [
-    {img: '../../assets/icon/favicon.ico', name: '脐橙', price: 22.00, count: 0},
-    {img: '../../assets/icon/favicon.ico', name: '脐橙2', price: 21.00, count: 0},
-    {img: '../../assets/icon/favicon.ico', name: '脐橙3', price: 20.00, count: 0},
-    {img: '../../assets/icon/favicon.ico', name: '脐橙4', price: 19.00, count: 0},
-    {img: '../../assets/icon/favicon.ico', name: '脐橙5', price: 18.00, count: 0},
-    {img: '../../assets/icon/favicon.ico', name: '脐橙6', price: 17.00, count: 0},
-    {img: '../../assets/icon/favicon.ico', name: '脐橙7', price: 18.80, count: 0},
+    {img: 'assets/icon/favicon.ico', name: '脐橙', price: 22.00, count: 0},
+    {img: 'assets/icon/favicon.ico', name: '脐橙2', price: 21.00, count: 0},
+    {img: 'assets/icon/favicon.ico', name: '脐橙3', price: 20.00, count: 0},
+    {img: 'assets/icon/favicon.ico', name: '脐橙4', price: 19.00, count: 0},
+    {img: 'assets/icon/favicon.ico', name: '脐橙5', price: 18.00, count: 0},
+    {img: 'assets/icon/favicon.ico', name: '脐橙6', price: 17.00, count: 0},
+    {img: 'assets/icon/favicon.ico', name: '脐橙7', price: 18.80, count: 0},
   ];
   public catagory = [{
     selected: true,
@@ -74,18 +76,14 @@ export class AboutPage {
     this.heigt = screen.height - 50;
     this.width = screen.width - 90;
     this.productData.getCategory().then(data => {
-      console.log('this.productData.getCategory()',data);
       this.catagory_new = data;
     })
-    // this.getData();
     // this.fetch.translateObj2UrlParam()
     this.showGoodsCart = this.showGoods.bind(this);
     this.dataPool.request('goods_cart').read('goodsCart').then(data => {
       this.shopCart = data['goods'];
-      console.log(data);
     })
     Event.subscribe('refreshCount',() => {
-      console.log('refreshCount 15482 8wee')
       this.goods = this.productData.fillCartCount(this.goods);
     })
     Event.subscribe('clearShopcart',() => {
@@ -102,83 +100,22 @@ export class AboutPage {
     })
   }
 
-  // getDataFrom() {
-    // console.log('this.productData.getProductInfo(21)',this.productData.getProductInfo(21));
-    // this.productData.getProductInfo(21).then(data => {
-    //   console.log('this.productData.getProductInfo(21) data ()()(',data);
-    // })
-
-    // this.productData.fillCartCount()
-  // }
 
   ionViewDidLeave() {
-    console.log('eedededececececececece',this.shopCart);
     // this.dataPool.request('goods_cart').write('goodsCart', {goods: this.shopCart});
   }
 
-  select_item(obj1, obj2) {
-    obj1.sub_item.name.map(item => {
-      item.selected = false;
-    });
-    obj2.selected = true;
-    this.catagory_item = obj2.value;
-  }
-
-  // add(obj) {
-  //   event.stopPropagation();
-  //   console.log(obj);
-  //   if (this.shopCart.goodsMenu.indexOf(obj) > -1) {
-  //     let i = this.shopCart.goodsMenu.indexOf(obj);
-  //     this.shopCart.goodsMenu[i].count += 1;
-  //   } else {
-  //     obj.count++;
-  //     this.shopCart.goodsMenu.push(obj);
-  //   }
-  //   this.shopCart.totalMoney += obj.price;
-  //   this.shopCart.totalAmount++;
-  //   this.dataPool.request('goods_cart').write('goodsCart', {goods: this.shopCart});
-  //   this.dataPool.request('goods_cart').read('goodsCart').then(data => {
-  //     // this.shopCart = data['goods'];
-  //     console.log(data);
-  //   })
-  //   //
-  //   // this.dataPool.request('goods_cart').onChange(() => {
-  //   //   console.log('dataPool onchange about');
-  //   // })
-  // }
-
-  // remove(obj) {
-  //   event.stopPropagation();
-  //   this.shopCart.totalMoney -= obj.price;
-  //   let i = this.shopCart.goodsMenu.indexOf(obj);
-  //   console.log('errrrrrrer',obj);
-  //   console.log('errrrrrrer',this.shopCart);
-  //   console.log('errrrrrrer',i);
-  //   if (obj.count > 1) {
-  //     console.log('err err ())(')
-  //     this.shopCart.goodsMenu[i].count--;
-  //   } else {
-  //     obj.count--;
-  //     this.shopCart.goodsMenu.splice(i, 1);
-  //   }
-  //   this.shopCart.totalAmount--;
-  //   this.dataPool.request('goods_cart').write('goodsCart', {goods: this.shopCart});
-  // }
-
-  // getData() {
-  //   this.fetch.request({
-  //     'url': '/food/rest/default/V1/categories',
-  //     'method': 'get',
-  //   }).then((data: {data}) => {
-  //     this.catagory_new = data.data.children_data;
-  //   })
+  // select_item(obj1, obj2) {
+  //   obj1.sub_item.name.map(item => {
+  //     item.selected = false;
+  //   });
+  //   obj2.selected = true;
+  //   this.catagory_item = obj2.value;
   // }
 
   select_new(obj) {
     this.selected_index = obj.id;
     let category_id = obj.id + 1;
-    console.log(obj);
-    console.log(obj.children_data);
     if (obj.children_data.length > 0) {
       this.sub_selected_index = obj.children_data[0].id;
     }
@@ -195,26 +132,11 @@ export class AboutPage {
 
   choose(sub) {
     this.sub_selected_index = sub.id;
-    // this.getProduct(sub.id).then(data => {
-    //   this.getProductList(data);
-    // });
-    // this.getProductInfo(sub.id);
     this.productData.getProductInfo(sub.id).then(data => {
       this.goods = this.productData.fillCartCount(data);
     })
     this.catagory_item = sub.name;
   }
-
-  // getProduct(id) {
-  //   let category_item = this.fetch.request({
-  //     'url': '/food/rest/default/V1/categories/' + id + '/products',
-  //     'method': 'get',
-  //   }).then((data: {data}) => {
-  //     console.log('data88888', data.data);
-  //     return data.data
-  //   })
-  //   return category_item;
-  // }
 
   // getProductList(obj) {
   //   this.fetch.request({
@@ -243,28 +165,6 @@ export class AboutPage {
   //   })
   // }
 
-  // dataTransfer(obj) {
-  //   return {
-  //     sku: obj.sku,
-  //     name: obj.name,
-  //     price: obj.price,
-  //     img: 'http://192.168.102.28:8000/pub/media/catalog/product' + obj.custom_attributes[1].value,
-  //     count: 0,
-  //     type: obj.type_id
-  //   }
-  // }
-  //
-  // getProductInfo(id) {
-  //   this.getProduct(id).then(data => {
-  //     this.getProductList(data);
-  //   })
-  // }
-
-  // chooseSub(son) {
-  //   console.log(son);
-  //   this.son_selected_index = son.id;
-  // }
-
   showGoods() {
     let popover = this.popoverCtrl.create(PopoverPage, {data: this.shopCart}, {
       cssClass: 'goodsMenu',
@@ -280,7 +180,7 @@ export class AboutPage {
   }
 
   goDetail(obj) {
-    if (obj.type == 'simple') {
+    if (obj.type == 'simple' || obj.type == 'downloadable') {
       this.router.push(GoodsInfoPage, {data: obj.sku});
     } else {
       this.router.push(GoodsListPage, {data: obj.sku});
