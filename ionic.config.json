@@ -6,6 +6,6 @@
   "proxies": [
     {
       "path": "/food/",
-      "proxyUrl": "http://192.168.102.28:8000"
+      "proxyUrl": "http://112.74.169.211:9999"
     }]
 }
