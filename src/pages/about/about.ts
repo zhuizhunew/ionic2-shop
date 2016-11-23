@@ -28,23 +28,23 @@ export class AboutPage {
   public width: any;
   public value: number = 0;
   public goods = [
-    {img: 'assets/icon/favicon.ico', name: '赣南脐橙', price: 22.00, count: 0, sku: 'qc1', selected: true},
-    {img: 'assets/icon/favicon.ico', name: '赣南脐橙2', price: 21.00, count: 0, sku: 'qc2', selected: true},
-    {img: 'assets/icon/favicon.ico', name: '赣南脐橙3', price: 20.00, count: 0, sku: 'qc3', selected: true},
-    {img: 'assets/icon/favicon.ico', name: '赣南脐橙4', price: 19.00, count: 0, sku: 'qc4', selected: true},
-    {img: 'assets/icon/favicon.ico', name: '赣南脐橙5', price: 18.00, count: 0, sku: 'qc5', selected: true},
-    {img: 'assets/icon/favicon.ico', name: '赣南脐橙6', price: 17.00, count: 0, sku: 'qc6', selected: true},
-    {img: 'assets/icon/favicon.ico', name: '赣南脐橙7', price: 18.80, count: 0, sku: 'qc7', selected: true},
+    // {img: 'assets/icon/favicon.ico', name: '赣南脐橙', price: 22.00, count: 0, sku: 'qc1', selected: true},
+    // {img: 'assets/icon/favicon.ico', name: '赣南脐橙2', price: 21.00, count: 0, sku: 'qc2', selected: true},
+    // {img: 'assets/icon/favicon.ico', name: '赣南脐橙3', price: 20.00, count: 0, sku: 'qc3', selected: true},
+    // {img: 'assets/icon/favicon.ico', name: '赣南脐橙4', price: 19.00, count: 0, sku: 'qc4', selected: true},
+    // {img: 'assets/icon/favicon.ico', name: '赣南脐橙5', price: 18.00, count: 0, sku: 'qc5', selected: true},
+    // {img: 'assets/icon/favicon.ico', name: '赣南脐橙6', price: 17.00, count: 0, sku: 'qc6', selected: true},
+    // {img: 'assets/icon/favicon.ico', name: '赣南脐橙7', price: 18.80, count: 0, sku: 'qc7', selected: true},
   ];
-  public goods1 = [
-    {img: 'assets/icon/favicon.ico', name: '脐橙', price: 22.00, count: 0},
-    {img: 'assets/icon/favicon.ico', name: '脐橙2', price: 21.00, count: 0},
-    {img: 'assets/icon/favicon.ico', name: '脐橙3', price: 20.00, count: 0},
-    {img: 'assets/icon/favicon.ico', name: '脐橙4', price: 19.00, count: 0},
-    {img: 'assets/icon/favicon.ico', name: '脐橙5', price: 18.00, count: 0},
-    {img: 'assets/icon/favicon.ico', name: '脐橙6', price: 17.00, count: 0},
-    {img: 'assets/icon/favicon.ico', name: '脐橙7', price: 18.80, count: 0},
-  ];
+  // public goods1 = [
+  //   {img: 'assets/icon/favicon.ico', name: '脐橙', price: 22.00, count: 0},
+  //   {img: 'assets/icon/favicon.ico', name: '脐橙2', price: 21.00, count: 0},
+  //   {img: 'assets/icon/favicon.ico', name: '脐橙3', price: 20.00, count: 0},
+  //   {img: 'assets/icon/favicon.ico', name: '脐橙4', price: 19.00, count: 0},
+  //   {img: 'assets/icon/favicon.ico', name: '脐橙5', price: 18.00, count: 0},
+  //   {img: 'assets/icon/favicon.ico', name: '脐橙6', price: 17.00, count: 0},
+  //   {img: 'assets/icon/favicon.ico', name: '脐橙7', price: 18.80, count: 0},
+  // ];
   public catagory = [{
     selected: true,
     value: '热销榜',
@@ -63,7 +63,7 @@ export class AboutPage {
     {selected: false, value: '配菜'}, {selected: false, value: '猪肉类快餐'}, {selected: false, value: '鱼/禽/蔬/豆类快餐'},
     {selected: false, value: '老火炖汤'}, {selected: false, value: '饮品'}, {selected: false, value: '大牌对折'},
     {selected: false, value: '大牌对折'}, {selected: false, value: '大牌对折'}, {selected: false, value: '大牌对折'},];
-  public catagory_item: any = "What's New";
+  public catagory_item: any = "Tops";
   public catagory_new: any;
   public selected_index: any;
   public sub_selected_index: any;
@@ -97,6 +97,10 @@ export class AboutPage {
     })
     Event.subscribe('goodsListCountReduce', () => {
       this.goods = this.productData.fillCartCount(this.goods);
+    })
+
+    this.productData.getProductInfo(21).then(data => {
+      this.goods = this.productData.fillCartCount(data);
     })
   }
 
