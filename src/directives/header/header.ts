@@ -12,6 +12,7 @@ import {Router} from 'emiya-ionic2-router';
 export class Header{
 
   @Input() title:any;
+  @Input() showBack:any = true;
   constructor(private router: Router) {
 
   }

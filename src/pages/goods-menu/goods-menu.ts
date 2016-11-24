@@ -66,8 +66,8 @@ export class PopoverPage {
   ionViewWillEnter() {
     // console.log("document.getElementsByClassName('ion-backdrop')[0]",document.getElementsByClassName('popover-content')[0]);
     // console.log('screen.height',screen.height);
-    document.getElementsByTagName('ion-popover')[0]['style'].height = screen.height - 50 + 'px';
-    document.getElementsByTagName('ion-backdrop')[0]['style'].height = screen.height - 50 + 'px';
+    document.getElementsByTagName('ion-popover')[0]['style'].height = window.innerHeight - 50 + 'px';
+    document.getElementsByTagName('ion-backdrop')[0]['style'].height = window.innerHeight - 50 + 'px';
   }
 
   close() {
@@ -149,16 +149,16 @@ export class PopoverPage {
 
   clearAllGoods() {
     let alert = this.alertCtrl.create({
-      message: '清空购物车中所有商品？',
+      message: 'Clear all goods in shopcart？',
       buttons: [
         {
-          text: '取消',
+          text: 'Cancel',
           handler: () => {
             console.log('quxiao')
           }
         },
         {
-          text: '确定',
+          text: 'OK',
           handler: this.clearShopCart.bind(this)
         }
       ]

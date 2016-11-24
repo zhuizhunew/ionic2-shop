@@ -1,14 +1,36 @@
-page-goods-info {
-  .goods-info-img-height {
-    text-align: center;
-    img {
-      height: 200px;
-    }
+//page-goods-info {
+.goods-info-img-height {
+  text-align: center;
+  img {
+    height: 200px;
   }
-  .content-slide {
-    ul {
-      text-align: left;
-      font-size: 14px;
+}
+
+.content-slide {
+  ul {
+    text-align: left;
+    font-size: 14px;
+  }
+}
+
+.goods-detail {
+  .goods-header {
+    border-bottom: none !important;
+    background: none !important;
+  }
+}
+
+//}
+.big-img-content2 {
+  .fixed-content {
+    background-color: #222222;
+  }
+  .scroll-content {
+    display: table;
+    height: 100%;
+    div {
+      display: table-cell;
+      vertical-align: middle;
     }
   }
 }

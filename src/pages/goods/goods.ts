@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import {Router} from 'emiya-ionic2-router';
 import {AboutPage} from '../about/about';
+import {Header} from '../../directives/header/header';
 
 
 

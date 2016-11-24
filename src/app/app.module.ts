@@ -38,7 +38,7 @@ import {GoodsPage} from '../pages/goods/goods';
     GoodsPage
   ],
   imports: [
-    IonicModule.forRoot(MyApp, {tabsPlacement: 'bottom'}, {
+    IonicModule.forRoot(MyApp, {tabsPlacement: 'bottom',popoverEnter: 'popover-pop-in'}, {
       links: [
         {component: LoginPage, name: 'Login', segment: 'login'},
         {component: LogoutPage, name: 'Logout', segment: 'logout'},

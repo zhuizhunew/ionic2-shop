@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Fetch} from "emiya-angular2-fetch";
 import {searchProductsBySkus} from '../tools/magento-search';
 import {DataPool} from 'emiya-angular2-datapool';
+import {preUrl} from '../configs/api';
 
 /*
  Generated class for the ProductData provider.
@@ -21,7 +22,7 @@ export class ProductData {
   //获取产品左侧种类
   getCategory() {
     return this.fetch.request({
-      'url': 'goodsCategory',
+      'url': '/food/rest/default/V1/categories',
     }).then((data: {data}) => {
       return data.data.children_data;
     }).catch(err => {
@@ -36,19 +37,23 @@ export class ProductData {
       'method': 'get',
     }).then((data: {data}) => {
       return data.data
+    }).catch(err => {
+      alert(err);
     })
   }
 
   //通过sku查询产品列表详细信息
   getProductList(obj) {
     return this.fetch.request({
-      'url': 'goodsList',
+      'url': '/food/rest/default/V1/products',
       params: searchProductsBySkus(obj)
     }).then((data: {data: {items}}) => {
       let goods = data.data.items.map(item => {
         return this.dataTransfer(item);
       })
       return goods;
+    }).catch(err => {
+      alert(err);
     })
   }
 
@@ -101,7 +106,7 @@ export class ProductData {
       sku: obj.sku,
       name: obj.name,
       price: obj.price,
-      img: 'http://192.168.102.28:8000/pub/media/catalog/product' + obj.custom_attributes[3].value,
+      img: 'http://112.74.169.211:9999/pub/media/catalog/product' + obj.custom_attributes[3].value,
       count: 0,
       type: obj.type_id,
       selected: true,

@@ -21,6 +21,8 @@ import {DataPool, DataPoolHandle} from 'emiya-angular2-datapool';
 })
 export class GoodsInfoPage {
 
+  public getBigImg:any = true;
+
   public goodsInfo: any = {
     img: '',
     name: '',
@@ -57,7 +59,7 @@ export class GoodsInfoPage {
     this.productData.getProductDetail(this.params.data.data).then(data => {
       this.goodsInfo.name = data['data']['name'];
       this.goodsInfo.price = data['data']['price'];
-      this.goodsInfo.img = 'http://192.168.102.28:8000/pub/media/catalog/product' + data['data']['custom_attributes'][3].value;
+      this.goodsInfo.img = 'http://112.74.169.211:9999/pub/media/catalog/product' + data['data']['custom_attributes'][3].value;
       this.goodsInfo.detail = data['data']['custom_attributes'][0].value;
       this.goodsInfo.sku = data['data']['sku'];
       this.goodsInfo = this.productData.fillCartCount(this.goodsInfo);
@@ -84,4 +86,7 @@ export class GoodsInfoPage {
     this.info_selected = this.infoSlider.getActiveIndex();
   }
 
+  showBigImg() {
+    this.getBigImg = !this.getBigImg;
+  }
 }

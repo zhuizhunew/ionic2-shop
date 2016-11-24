@@ -18,6 +18,8 @@ import {Header} from '../../directives/header/header';
 })
 export class GoodsListPage {
 
+  public getBigImg:any = true;
+
   public goodsImg: any = [];
   public goodsName: any;
   public goodsPrice: any;
@@ -127,7 +129,7 @@ export class GoodsListPage {
       this.goodsInfo.goodsSize = this.getAttributeData(this.sizeStandard, size);
       this.goodsInfo.img = this.unique(
         data['data'].map(item => {
-          return 'http://192.168.102.28:8000/pub/media/catalog/product' + item['custom_attributes'][6].value
+          return 'http://112.74.169.211:9999/pub/media/catalog/product' + item['custom_attributes'][6].value
         })
       )
       this.goodsInfo = this.productData.fillCartCount_size(this.goodsInfo);
@@ -368,6 +370,11 @@ export class GoodsListPage {
         popover.dismiss(undefined, undefined, {duration: 1000, animate: false})
       }
     });
+  }
+
+
+  showBigImg() {
+    this.getBigImg = !this.getBigImg;
   }
 }
 

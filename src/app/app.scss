@@ -1,6 +1,5 @@
 // http://ionicframework.com/docs/v2/theming/
 
-
 // App Global Sass
 // --------------------------------------------------
 // Put style rules here that you want to apply globally. These
@@ -15,12 +14,31 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
-
 @mixin wh($width, $heigh) {
   width: $width;
   height: $heigh;
 }
 
-.footer-md::before, .tabs-md[tabsPlacement="bottom"] > .tabbar::before {
-  background-image: none!important;
+//.footer-md::before, .tabs-md[tabsPlacement="bottom"] > .tabbar::before {
+//  background-image: none !important;
+//}
+
+//ionic原始样式重构
+.tabs-md .tab-button {
+  padding: 0 !important;
+  min-height: auto !important;
+}
+
+.tabs-md .tab-button-text {
+  margin: 0 !important;
+}
+
+.header-md::after, .tabs-md[tabsPlacement="top"] > .tabbar::after {
+  background-image: none !important;
+}
+
+
+//android popover内容可见样式
+.popover-md .popover-viewport {
+  opacity: 1 !important;
 }

@@ -19,3 +19,11 @@ export const Api = {
     'method': 'get',
   }
 }
+
+export const proxy = [
+  {
+    "path": "/food/",
+    "proxyUrl": "http://112.74.169.211:9999/food/"
+  }]
+
+export const preUrl = 'http://112.74.169.211:9999';

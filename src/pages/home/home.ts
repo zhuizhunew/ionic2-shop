@@ -4,6 +4,7 @@ import { NavController,Platform } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { Data } from '../../providers/data';
 import {Http} from '@angular/http';
+import {Header} from '../../directives/header/header';
 
 @Component({
   selector: 'page-home',

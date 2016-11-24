@@ -11,11 +11,14 @@
   <!--</ion-navbar>-->
 
 <!--</ion-header>-->
-<header></header>
+<header class="goods-detail" *ngIf="getBigImg"></header>
 
+<ion-content (click)="showBigImg()" *ngIf="!getBigImg" class="big-img-content2">
+  <div><img src="{{ goodsInfo.img }}" alt=""></div>
+</ion-content>
 
-<ion-content>
-  <div class="goods-info-img-height"><img src="{{ goodsInfo.img }}" alt=""></div>
+<ion-content class="ion-content-margin-bottom" *ngIf="getBigImg">
+  <div class="goods-info-img-height" (click)="showBigImg()"><img src="{{ goodsInfo.img }}" alt=""></div>
   <div class="goods-info">
     <div class="goods-name">
       <p>{{ goodsInfo.name }}</p>
@@ -39,4 +42,4 @@
     </ion-slide>
   </ion-slides>
 </ion-content>
-<shopCart class="goods-list-bottom"></shopCart>
+<shopCart class="goods-list-bottom" *ngIf="getBigImg"></shopCart>

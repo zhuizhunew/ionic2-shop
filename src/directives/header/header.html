@@ -1,4 +1,4 @@
 <ion-header class="goods-header">
-  <span (click)="goBack()"><img src="assets/icon/ic_keyboard_arrow_left_black_24px%20(1).svg" alt=""></span>
-  <span>{{ title }}</span>
+  <span (click)="goBack()" *ngIf="showBack == true" class="back-img"><img src="assets/icon/ic_keyboard_arrow_left_black_24px%20(1).svg" alt=""></span>
+  <span class="title">{{ title }}</span>
 </ion-header>

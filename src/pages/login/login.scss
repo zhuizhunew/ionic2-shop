@@ -1,8 +1,8 @@
 ion-scroll {
   .scroll-content {
-    padding: 0!important;
+    padding: 0 !important;
     p {
-      margin:0!important;
+      margin: 0 !important;
       min-height: 30px;
       line-height: 30px;
       padding-left: 5px;
@@ -10,6 +10,9 @@ ion-scroll {
       span {
         display: block;
         border-bottom: 1px dashed #dddddd;
+        &:last-child {
+          border-bottom: none !important;
+        }
       }
     }
     .selected {

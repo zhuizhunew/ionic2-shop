@@ -5,7 +5,7 @@
   <!--</ion-navbar>-->
 
 <!--</ion-header>-->
-<header title="订单结算" class="order-page" *ngIf="canGoBack()"></header>
+<header title="Order" class="order-page" *ngIf="canGoBack()"></header>
 <ion-header *ngIf="!canGoBack()" class="shop-cart" style="background-color: rgb(248,248,248);border-bottom: 1px solid #b2b2b2">
   <span>ShopCart</span>
 </ion-header>
@@ -13,7 +13,7 @@
 <ion-content padding [ngClass]="canGoBack()?'have-margin-top':''">
   <div *ngFor="let obj of goodsOrder.goodsMenu" class="goods-order">
     <img src="{{ obj.selected?'assets/icon/ic_check_black_24px.svg':'assets/icon/ic_check_white_24px.svg' }}" alt="" (click)="check(obj)" *ngIf="canGoBack()" class="check">
-    <img src="{{ obj.img?obj.img: 'http://192.168.102.28:8000/pub/media/catalog/product/w/b/wb03-green_main.jpg' }}" alt="" class="goods-img-size">
+    <img src="{{ obj.img?obj.img: 'http://112.74.169.211:9999/pub/media/catalog/product/w/b/wb03-green_main.jpg' }}" alt="" class="goods-img-size">
     <div class="name-price">
       <p>{{ obj.name }}</p>
       <p>
@@ -26,6 +26,6 @@
 </ion-content>
 <ion-footer class="goods-order-footer" *ngIf="canGoBack()">
   <div>
-    <span>应付：${{goodsOrder.totalMoney}}</span><span>提交订单</span>
+    <span>AMOUNT：${{goodsOrder.totalMoney}}</span><span>SUBMIT ORDER</span>
   </div>
 </ion-footer>

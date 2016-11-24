@@ -63,7 +63,7 @@
         line-height: 30px;
         text-align: center;
         display: inline-block;
-        margin: 0 10px;
+        margin: 0 5px;
         border: 1px solid #eeeeee;
       }
       .selected {
@@ -131,14 +131,24 @@
 //////////////////////
 .goods-list-bottom {
   ion-footer {
-    bottom: 0!important;
+    bottom: 0 !important;
+  }
+}
+
+.ion-content-margin-bottom {
+  .scroll-content {
+    margin-bottom: 50px;
+  }
+}
+
+//大图
+.big-img-content {
+  .fixed-content {
+    background-color: #222222;
   }
 }
 
 
-.header-md::after, .tabs-md[tabsPlacement="top"] > .tabbar::after, .footer-md::before,
-.tabs-md[tabsPlacement="bottom"] > .tabbar::before {
-  background-image: none!important;
-}
+
 
 

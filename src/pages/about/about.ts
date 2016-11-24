@@ -8,12 +8,11 @@ import {PopoverPage} from '../goods-menu/goods-menu';
 import {GoodsInfoPage} from '../goods-info/goods-info';
 import {GoodsListPage} from '../goods-list/goods-list';
 import {ShopCartPage} from '../../directives/shopcart/shopcart-footer';
-import {DataPool,DataPoolHandle} from 'emiya-angular2-datapool';
+import {DataPool, DataPoolHandle} from 'emiya-angular2-datapool';
 import {ProductData} from '../../providers/product-data';
 import {Event} from 'emiya-angular2-event';
 import {PlusReduce} from '../../directives/plus-reduce/plus-reduce';
 import {Header} from '../../directives/header/header';
-
 
 
 @Component({
@@ -73,6 +72,7 @@ export class AboutPage {
 
   constructor(public navCtrl: NavController, private fetch: Fetch, private popoverCtrl: PopoverController,
               private router: Router, private dataPool: DataPool, private productData: ProductData) {
+    console.log('window.devicePixelRatio',window.devicePixelRatio);
     this.heigt = screen.height - 50;
     this.width = screen.width - 90;
     this.productData.getCategory().then(data => {
@@ -83,21 +83,28 @@ export class AboutPage {
     this.dataPool.request('goods_cart').read('goodsCart').then(data => {
       this.shopCart = data['goods'];
     })
-    Event.subscribe('refreshCount',() => {
+    Event.subscribe('refreshCount', () => {
+      // alert('refreshCount');
       this.goods = this.productData.fillCartCount(this.goods);
     })
-    Event.subscribe('clearShopcart',() => {
+    Event.subscribe('clearShopcart', () => {
       this.goods.map(item => {
         item.count = 0;
       });
     })
 
     Event.subscribe('goodListCountPlus', () => {
+      // alert('goodListCountPlus');
       this.goods = this.productData.fillCartCount(this.goods);
     })
     Event.subscribe('goodsListCountReduce', () => {
+      // alert('goodsListCountReduce');
       this.goods = this.productData.fillCartCount(this.goods);
     })
+
+    // this.dataPool.request('goods_cart').onChange(() => {
+    //   this.goods = this.productData.fillCartCount(this.goods);
+    // })
 
     this.productData.getProductInfo(21).then(data => {
       this.goods = this.productData.fillCartCount(data);
@@ -105,7 +112,7 @@ export class AboutPage {
   }
 
 
-  ionViewDidLeave() {
+  ionViewDidEnter() {
     // this.dataPool.request('goods_cart').write('goodsCart', {goods: this.shopCart});
   }
 
@@ -184,7 +191,7 @@ export class AboutPage {
   }
 
   goDetail(obj) {
-    if (obj.type == 'simple' || obj.type == 'downloadable') {
+    if (obj.type == 'simple' || obj.type == 'downloadable' || obj.type == 'bundle' || obj.type == 'grouped') {
       this.router.push(GoodsInfoPage, {data: obj.sku});
     } else {
       this.router.push(GoodsListPage, {data: obj.sku});
