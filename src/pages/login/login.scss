@@ -30,14 +30,6 @@ ion-scroll {
     .selected2 {
       background-color: #ffffff;
       color: #2ec95c;
-      //&:before {
-      //  content: '';
-      //  position: absolute;
-      //  width: 2px;
-      //  height: 30px;
-      //  background-color: #2ec95c;
-      //  left: 0;
-      //}
     }
     .selected4 {
       background-color: #ffffff;
@@ -46,14 +38,21 @@ ion-scroll {
     .selected3 {
       background-color: #ffffff;
       color: #4d004d;
-      //&:before {
-      //  content: '';
-      //  position: absolute;
-      //  width: 2px;
-      //  height: 30px;
-      //  background-color: #9eeeb6;
-      //  left: 0;
-      //}
     }
   }
 }
+
+.toast-class {
+  .toast-wrapper {
+    @include wh(300px, 40px);
+    opacity: 0.8 !important;
+    border-radius: 0.65rem;
+    .toast-container {
+      height: 40px;
+      .toast-message {
+        text-align: center;
+      }
+    }
+  }
+}
+

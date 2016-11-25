@@ -13,12 +13,13 @@ import {ProductData} from '../../providers/product-data';
 import {Event} from 'emiya-angular2-event';
 import {PlusReduce} from '../../directives/plus-reduce/plus-reduce';
 import {Header} from '../../directives/header/header';
+import {Loading} from '../../tools/loading';
 
 
 @Component({
   selector: 'page-about',
   templateUrl: 'about.html',
-  providers: [ProductData]
+  // providers: [ProductData,Loading]
 })
 
 export class AboutPage {
@@ -71,8 +72,8 @@ export class AboutPage {
   public showGoodsCart: any;
 
   constructor(public navCtrl: NavController, private fetch: Fetch, private popoverCtrl: PopoverController,
-              private router: Router, private dataPool: DataPool, private productData: ProductData) {
-    console.log('window.devicePixelRatio',window.devicePixelRatio);
+              private router: Router, private dataPool: DataPool, private productData: ProductData,private load: Loading) {
+    // console.log('window.devicePixelRatio',window.devicePixelRatio);
     this.heigt = screen.height - 50;
     this.width = screen.width - 90;
     this.productData.getCategory().then(data => {
@@ -107,7 +108,10 @@ export class AboutPage {
     // })
 
     this.productData.getProductInfo(21).then(data => {
+      this.load.hideLoading();
       this.goods = this.productData.fillCartCount(data);
+    }).catch((err) => {
+      alert(err);
     })
   }
 
@@ -132,6 +136,7 @@ export class AboutPage {
     }
     // this.getProductInfo(category_id);
     this.productData.getProductInfo(category_id).then(data => {
+      this.load.hideLoading();
       this.goods = this.productData.fillCartCount(data);
     })
     if (obj.children_data.length > 0) {
@@ -144,6 +149,7 @@ export class AboutPage {
   choose(sub) {
     this.sub_selected_index = sub.id;
     this.productData.getProductInfo(sub.id).then(data => {
+      this.load.hideLoading();
       this.goods = this.productData.fillCartCount(data);
     })
     this.catagory_item = sub.name;

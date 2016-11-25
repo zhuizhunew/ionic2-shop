@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 // import {Http} from '@angular/http';
 // import 'rxjs/add/operator/map';
 import {DataPool} from 'emiya-angular2-datapool';
-import {preUrl} from '../configs/api';
 
 /*
  Generated class for the LoadAttribute provider.
@@ -22,8 +21,7 @@ export class LoadAttribute {
       id: 'color',
       period: 3600 * 24 * 30,
       request: {
-        'method': 'get',
-        'url': '/food/rest/default/V1/products/attributes/color',
+        'url': 'color',
       },
       receive_mode: 'payload',
       receive_path: 'options'
@@ -33,7 +31,7 @@ export class LoadAttribute {
       period: 3600 * 24 * 30,
       request: {
         'method': 'get',
-        'url': '/food/rest/default/V1/products/attributes/size',
+        'url': 'size',
       },
       receive_mode: 'payload',
       receive_path: 'options'
@@ -43,7 +41,7 @@ export class LoadAttribute {
       period: 3600 * 24 * 30,
       request: {
         'method': 'get',
-        'url': '/food/rest/default/V1/products/attributes/pattern',
+        'url': 'pattern',
       },
       receive_mode: 'payload',
       receive_path: 'options'
@@ -53,7 +51,7 @@ export class LoadAttribute {
       period: 3600 * 24 * 30,
       request: {
         'method': 'get',
-        'url': '/food/rest/default/V1/products/attributes/climate',
+        'url': 'climate',
       },
       receive_mode: 'payload',
       receive_path: 'options'
@@ -63,7 +61,7 @@ export class LoadAttribute {
       period: 3600 * 24 * 30,
       request: {
         'method': 'get',
-        'url': '/food/rest/default/V1/products/attributes/material',
+        'url': 'material',
       },
       receive_mode: 'payload',
       receive_path: 'options'
@@ -73,7 +71,7 @@ export class LoadAttribute {
       period: 3600 * 24 * 30,
       request: {
         'method': 'get',
-        'url': '/food/rest/default/V1/products/attributes/style_general',
+        'url': 'style_general',
       },
       receive_mode: 'payload',
       receive_path: 'options'
@@ -83,7 +81,7 @@ export class LoadAttribute {
       period: 3600 * 24 * 30,
       request: {
         'method': 'get',
-        'url': '/food/rest/default/V1/products/attributes/style_bottom',
+        'url': 'style_bottom',
       },
       receive_mode: 'payload',
       receive_path: 'options'

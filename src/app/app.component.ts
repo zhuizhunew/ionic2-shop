@@ -6,8 +6,8 @@ import {Router} from 'emiya-ionic2-router';
 import {Routes} from '../configs/routes';
 import {DataPool,DataPoolHandle} from 'emiya-angular2-datapool';
 import {LoadAttribute} from '../providers/load-attribute';
-// import {Api, proxy} from '../configs/api';
 import { Fetch } from "emiya-angular2-fetch";
+import {Api, proxy} from '../configs/api';
 
 
 
@@ -21,7 +21,7 @@ export class MyApp {
   constructor(platform: Platform, private router: Router, private dataPool: DataPool, private loadAttribute: LoadAttribute, private fetch: Fetch) {
     router.setVersion('Hello World', 10000);
     router.load(Routes);
-    // fetch.load('dev',Api, proxy);
+    fetch.load('dev',Api, proxy);
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.

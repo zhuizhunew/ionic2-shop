@@ -14,7 +14,7 @@ import {Header} from '../../directives/header/header';
 @Component({
   selector: 'page-goods-list',
   templateUrl: 'goods-list.html',
-  providers: [ProductData]
+  // providers: [ProductData]
 })
 export class GoodsListPage {
 

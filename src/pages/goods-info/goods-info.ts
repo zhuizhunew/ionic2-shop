@@ -17,7 +17,7 @@ import {DataPool, DataPoolHandle} from 'emiya-angular2-datapool';
 @Component({
   selector: 'page-goods-info',
   templateUrl: 'goods-info.html',
-  providers: [ProductData]
+  // providers: [ProductData]
 })
 export class GoodsInfoPage {
 
